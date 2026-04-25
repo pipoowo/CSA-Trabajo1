@@ -1,7 +1,7 @@
 ---
 title: "Reporte de Reproducibilidad"
-subtitle: "Artículo: [título del artículo a reproducir]
- <br><a href='https://github.com/data-soc/template-repro' target='_blank' ><i class='bi bi-github'></i></a>" # reemplazar con dirección al repositorio del proyecto
+subtitle: "Artículo: [Peréz-Ahumada, P. & Carrasco, K. (2025). Política de clases y confianza en los sindicatos en América Latina]
+ <br><a href='https://github.com/pipoowo/CSA-Trabajo1' target='_blank' ><i class='bi bi-github'></i></a>" # reemplazar con dirección al repositorio del proyecto
 author:
   - name: Elisa Calderón
     email: elisacalderon@ug.uchile.cl
@@ -16,7 +16,7 @@ author:
     affiliations:
       - ref: 1 
   - name: Felipe Vega
-    email: felipe.vega.g@ug.uchile.com 
+    email: felipe.vega.g@ug.uchile.cl 
     affiliations:
       - ref: 1 
 affiliations: 
@@ -37,7 +37,7 @@ format:
     number-sections: true
     number-depth: 3
     theme:
-        - libs/ocs.scss
+      - libs/ocs.scss
     code-link: true
     title-block-banner: true
     include-in-header:
@@ -48,7 +48,7 @@ format:
           }
           .subtitle {
             color: #ffffff !important;
-          }x
+          }
         </style>
   pdf:
     toc: true
@@ -59,6 +59,7 @@ editor_options:
 # bibliography: "input/bib/mi_coleccion.bib"
 csl: "input/bib/apa6.csl"
 ---
+
 {{< include anidados/1-seleccion-articulo.qmd >}}
 
 {{< include anidados/2-eval-reprod.qmd >}}
