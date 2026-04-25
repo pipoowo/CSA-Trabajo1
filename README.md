@@ -12,10 +12,20 @@ Este proyecto se organiza de la siguiente manera:
 
 <!-- WORKING_TREE_START -->
 ```text
-template-repro/
+CSA-Trabajo1/
  |- .vscode/
  |  |- settings.json
  |- README.md
+ |- anidados/
+ |  |- 1-seleccion-articulo.qmd
+ |  |- 2-eval-reprod.qmd
+ |  |- 3-analisis-resultado-reproducir.qmd
+ |  |- 4-reprod-procesamiento.qmd
+ |  |- 5-reprod-fig.qmd
+ |  |- 6-conclusiones.qmd
+ |  |- 7-recomendaciones.qmd
+ |  |- 8-referencias.qmd
+ |  |- 9-apendice.qmd
  |- index.html
  |- index.pdf
  |- index.qmd
