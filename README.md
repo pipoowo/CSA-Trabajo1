@@ -1,8 +1,8 @@
 # Reporte de reproducibilidad
 
-Link al reporte [**AQUÍ**](https://pipoowo.github.io/CSA-trabajo1/index.html)
+Link al reporte [**AQUÍ**](https://pipoowo.github.io/CSA-Trabajo1/index.html)
 
-Este repositorio contiene una plantilla para el reporte de reproducibilidad del Trabajo 1 del curso [Investigación Social Abierta](https://cienciasocialabierta.cl/2026/). La plantilla está diseñada para ser clonada y modificada por cada estudiante, siguiendo el protocolo [IPO](https://lisacoes.com/protocolos/a-ipo-rep/) (IInput-Processing-Output) y utilizando el formato Quarto.
+Este repositorio contiene el Trabajo 1 que consiste en un reporte de reproducibilidad en el marco del curso [Ciencia Social Abierta](https://cienciasocialabierta.cl/2026/).
 
 <img src="https://lisacoes.com/protocolos/a-ipo-rep/ipo-hex.png" alt="IPO" width="220" />
 
