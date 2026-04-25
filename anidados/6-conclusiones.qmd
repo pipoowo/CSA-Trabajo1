@@ -1,0 +1,8 @@
+---
+title: "Untitled"
+format: html
+---
+
+# Conclusiones
+
+Basándose en el análisis realizado, escriban una conclusión sobre el nivel de reproducibilidad del artículo seleccionado.

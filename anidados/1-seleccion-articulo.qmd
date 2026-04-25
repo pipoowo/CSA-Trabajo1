@@ -1,0 +1,9 @@
+---
+title: "Untitled"
+format: html
+---
+# Selección de artículo/reporte
+
+- Referencia del artículo seleccionado
+- Breve resumen del artículo seleccionado
+- Justificación de la selección del artículo

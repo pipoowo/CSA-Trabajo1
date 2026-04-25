@@ -3,16 +3,20 @@ title: "Reporte de Reproducibilidad"
 subtitle: "Artículo: [título del artículo a reproducir]
  <br><a href='https://github.com/data-soc/template-repro' target='_blank' ><i class='bi bi-github'></i></a>" # reemplazar con dirección al repositorio del proyecto
 author:
-  - name: Autor 1
-    email: mail@mail.com 
+  - name: Elisa Calderón
+    email: elisacalderon@ug.uchile.cl
     affiliations:
       - ref: 1
-  - name: Autor 2
-    email: mail@mail.com 
+  - name: Valentina Montecinos
+    email: v.montecinos@ug.uchile.cl 
     affiliations:
       - ref: 1
-  - name: Autor 3
-    email: mail@mail.com 
+  - name: Amalia Tsukame
+    email: amalia.tsukame@ug.uchile.cl 
+    affiliations:
+      - ref: 1 
+  - name: Felipe Vega
+    email: felipe.vega.g@ug.uchile.com 
     affiliations:
       - ref: 1 
 affiliations: 
@@ -55,67 +59,20 @@ editor_options:
 # bibliography: "input/bib/mi_coleccion.bib"
 csl: "input/bib/apa6.csl"
 ---
+{{< include anidados/1-seleccion-articulo.qmd >}}
 
+{{< include anidados/2-eval-reprod.qmd >}}
 
+{{< include anidados/3-analisis-resultado-reproducir.qmd >}}
 
-# Selección de artículo/reporte
+{{< include anidados/4-reprod-procesamiento.qmd >}}
 
-- Referencia del artículo seleccionado
-- Breve resumen del artículo seleccionado
-- Justificación de la selección del artículo
+{{< include anidados/5-reprod-fig.qmd >}}
 
-# Evaluación de reproducibilidad
+{{< include anidados/6-conclusiones.qmd >}}
 
-Análisis detallado del artículo seleccionado, evaluando los siguientes aspectos:
+{{< include anidados/7-recomendaciones.qmd >}}
 
-  -   **Disponibilidad de datos**: ¿El artículo proporciona acceso a los datos utilizados en el estudio? Si no es así, ¿qué dificultades se enfrentaron para obtener los datos?
-  -   **Disponibilidad de código**: ¿El artículo proporciona acceso al código utilizado para el análisis? Si es así, ¿cómo se puede acceder?
-  -   **Documentación**: ¿El artículo incluye una descripción clara de los métodos y procedimientos utilizados en el estudio? ¿Es suficiente para que otro investigador pueda replicar el estudio?
-  -   **Transparencia**: ¿El artículo proporciona información sobre los posibles conflictos de interés, financiamiento, y otros aspectos relacionados con la transparencia de la investigación?   
+{{< include anidados/8-referencias.qmd >}}
 
-# Análisis reproducible
-
-Seleccionar un resultado específico del artículo (por ejemplo, una tabla de resultados o una figura) y tratar de reproducirlo utilizando los datos y el código proporcionados. Documentar el proceso de reproducción, incluyendo cualquier dificultad encontrada y cómo se resolvió.
-
-## Resultado a reproducir
-
-- Imagen de tabla(s), figura(s) o resultado específico del artículo seleccionado, junto a una breve descripción.
-
-## Proceso de reproducción
-
-- Descripción detallada del proceso seguido para reproducir el resultado seleccionado, incluyendo los pasos realizados, las herramientas utilizadas, y cualquier ajuste necesario para lograr la reproducción. Incluye las siguientes sub secciones:
-
-### Procesamiento
-
-- Incluye el código utilizado para procesar los datos, junto con una explicación de cada paso. 
-
-- Los datos originales deben ser llamados desde input/data/original, el código de procesamiento se debe incluir en este mismo archivo (reporte-repro.qmd).
-
-### Reproducción
-
-- Generación de tabla o figura a reproducir.
-
-# Conclusiones
-
-Basándose en el análisis realizado, escriban una conclusión sobre el nivel de reproducibilidad del artículo seleccionado.
-
-# Recomendaciones
-
-Recomendaciones para mejorar la reproducibilidad del artículo, si es necesario.
-
-# Referencias
-
-::: {#refs}
-:::
-
-# Apéndice
-
-## Material suplementario
-
-- Incluyan aquí detalles metodológicos adicionales, en caso de ser necesario
-
-## Código
-
-- Incluir acá el código original, en caso de estar disponible.
-
-
+{{< include anidados/9-apendice.qmd >}}

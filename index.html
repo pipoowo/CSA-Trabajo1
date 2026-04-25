@@ -2,16 +2,20 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.33">
+<meta name="generator" content="quarto-1.9.36">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Autor 1">
-<meta name="author" content="Autor 2">
-<meta name="author" content="Autor 3">
+<meta name="author" content="Elisa Calderón">
+<meta name="author" content="Valentina Montecinos">
+<meta name="author" content="Amalia Tsukame">
+<meta name="author" content="Felipe Vega">
 
-<title>Reporte de Reproducibilidad</title>
+<title>Untitled</title>
 <style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
 div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -23,7 +27,26 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="index_files/libs/clipboard/clipboard.min.js"></script>
@@ -33,111 +56,93 @@ ul.task-list li input[type="checkbox"] {
 <script src="index_files/libs/quarto-html/tippy.umd.min.js"></script>
 <script src="index_files/libs/quarto-html/anchor.min.js"></script>
 <link href="index_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="index_files/libs/quarto-html/quarto-syntax-highlighting-ea385d0e468b0dd5ea5bf0780b1290d9.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="index_files/libs/quarto-html/quarto-syntax-highlighting-845c23b38eaddc0f92fda52bfe77a8c8.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="index_files/libs/bootstrap/bootstrap.min.js"></script>
 <link href="index_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="index_files/libs/bootstrap/bootstrap-b832b01a31bc3ca4fdb8da1ffc392533.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
-<style>
-  h1.title {
-    color: #ffffff !important;
-  }
-  .subtitle {
-    color: #ffffff !important;
-  }x
-</style>
+<link href="index_files/libs/bootstrap/bootstrap-e298ff0638e20b3678fc47ea1593b4d5.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 
 
 </head>
 
-<body class="quarto-light">
+<body class="fullcontent quarto-light">
 
-<header id="title-block-header" class="quarto-title-block default page-columns page-full">
-  <div class="quarto-title-banner page-columns page-full">
-    <div class="quarto-title column-body">
-      <h1 class="title">Reporte de Reproducibilidad</h1>
-            <p class="subtitle lead">Artículo: [título del artículo a reproducir] <br><a href="https://github.com/data-soc/template-repro" target="_blank"><i class="bi bi-github"></i></a></p>
-                      </div>
-  </div>
-    
-  <div class="quarto-title-meta-author">
-    <div class="quarto-title-meta-heading">Autores/as</div>
-    <div class="quarto-title-meta-heading">Afiliación</div>
-    
-      <div class="quarto-title-meta-contents">
-      <p class="author">Autor 1 <a href="mailto:mail@mail.com" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> </p>
-    </div>
-    <div class="quarto-title-meta-contents">
-          <p class="affiliation">
-              Departamento de Sociología, Universidad de Chile
-            </p>
-        </div>
-      <div class="quarto-title-meta-contents">
-      <p class="author">Autor 2 <a href="mailto:mail@mail.com" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> </p>
-    </div>
-    <div class="quarto-title-meta-contents">
-          <p class="affiliation">
-              Departamento de Sociología, Universidad de Chile
-            </p>
-        </div>
-      <div class="quarto-title-meta-contents">
-      <p class="author">Autor 3 <a href="mailto:mail@mail.com" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> </p>
-    </div>
-    <div class="quarto-title-meta-contents">
-          <p class="affiliation">
-              Departamento de Sociología, Universidad de Chile
-            </p>
-        </div>
-    </div>
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
 
-  <div class="quarto-title-meta">
+<main class="content" id="quarto-document-content">
 
-        
-      <div>
-      <div class="quarto-title-meta-heading">Fecha de publicación</div>
-      <div class="quarto-title-meta-contents">
-        <p class="date">21 de abril de 2026</p>
-      </div>
-    </div>
-    
-      
-    </div>
-    
-  
-  </header><div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
-<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-  <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="2">
-    <h2 id="toc-title">Contenidos</h2>
-   
-  <ul class="collapse">
-  <li><a href="#selección-de-artículoreporte" id="toc-selección-de-artículoreporte" class="nav-link active" data-scroll-target="#selección-de-artículoreporte"><span class="header-section-number">1</span> Selección de artículo/reporte</a></li>
-  <li><a href="#evaluación-de-reproducibilidad" id="toc-evaluación-de-reproducibilidad" class="nav-link" data-scroll-target="#evaluación-de-reproducibilidad"><span class="header-section-number">2</span> Evaluación de reproducibilidad</a></li>
-  <li><a href="#análisis-reproducible" id="toc-análisis-reproducible" class="nav-link" data-scroll-target="#análisis-reproducible"><span class="header-section-number">3</span> Análisis reproducible</a>
-  <ul class="collapse">
-  <li><a href="#resultado-a-reproducir" id="toc-resultado-a-reproducir" class="nav-link" data-scroll-target="#resultado-a-reproducir"><span class="header-section-number">3.1</span> Resultado a reproducir</a></li>
-  <li><a href="#proceso-de-reproducción" id="toc-proceso-de-reproducción" class="nav-link" data-scroll-target="#proceso-de-reproducción"><span class="header-section-number">3.2</span> Proceso de reproducción</a></li>
-  </ul></li>
-  <li><a href="#conclusiones" id="toc-conclusiones" class="nav-link" data-scroll-target="#conclusiones"><span class="header-section-number">4</span> Conclusiones</a></li>
-  <li><a href="#recomendaciones" id="toc-recomendaciones" class="nav-link" data-scroll-target="#recomendaciones"><span class="header-section-number">5</span> Recomendaciones</a></li>
-  <li><a href="#referencias" id="toc-referencias" class="nav-link" data-scroll-target="#referencias"><span class="header-section-number">6</span> Referencias</a></li>
-  </ul>
-<div class="quarto-alternate-formats"><h2>Otros formatos</h2><ul><li><a href="index.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Untitled</h1>
+<p class="subtitle lead">Artículo: [título del artículo a reproducir] <br><a href="https://github.com/data-soc/template-repro" target="_blank"><i class="bi bi-github"></i></a></p>
 </div>
-<main class="content quarto-banner-title-block" id="quarto-document-content">
 
 
+<div class="quarto-title-meta-author">
+  <div class="quarto-title-meta-heading">Autores/as</div>
+  <div class="quarto-title-meta-heading">Afiliación</div>
+  
+    <div class="quarto-title-meta-contents">
+    <p class="author">Elisa Calderón <a href="mailto:elisacalderon@ug.uchile.cl" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> </p>
+  </div>
+  <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            Departamento de Sociología, Universidad de Chile
+          </p>
+      </div>
+    <div class="quarto-title-meta-contents">
+    <p class="author">Valentina Montecinos <a href="mailto:v.montecinos@ug.uchile.cl" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> </p>
+  </div>
+  <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            Departamento de Sociología, Universidad de Chile
+          </p>
+      </div>
+    <div class="quarto-title-meta-contents">
+    <p class="author">Amalia Tsukame <a href="mailto:amalia.tsukame@ug.uchile.cl" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> </p>
+  </div>
+  <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            Departamento de Sociología, Universidad de Chile
+          </p>
+      </div>
+    <div class="quarto-title-meta-contents">
+    <p class="author">Felipe Vega <a href="mailto:felipe.vega.g@ug.uchile.com" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> </p>
+  </div>
+  <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            Departamento de Sociología, Universidad de Chile
+          </p>
+      </div>
+  </div>
+
+<div class="quarto-title-meta">
+
+      
+    <div>
+    <div class="quarto-title-meta-heading">Fecha de publicación</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">25 de abril de 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
 
 
+</header>
 
-<section id="selección-de-artículoreporte" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> Selección de artículo/reporte</h1>
+
+<section id="selección-de-artículoreporte" class="level1">
+<h1>Selección de artículo/reporte</h1>
 <ul>
 <li>Referencia del artículo seleccionado</li>
 <li>Breve resumen del artículo seleccionado</li>
 <li>Justificación de la selección del artículo</li>
 </ul>
 </section>
-<section id="evaluación-de-reproducibilidad" class="level1" data-number="2">
-<h1 data-number="2"><span class="header-section-number">2</span> Evaluación de reproducibilidad</h1>
+<section id="evaluación-de-reproducibilidad" class="level1">
+<h1>Evaluación de reproducibilidad</h1>
 <p>Análisis detallado del artículo seleccionado, evaluando los siguientes aspectos:</p>
 <ul>
 <li><strong>Disponibilidad de datos</strong>: ¿El artículo proporciona acceso a los datos utilizados en el estudio? Si no es así, ¿qué dificultades se enfrentaron para obtener los datos?</li>
@@ -146,45 +151,63 @@ ul.task-list li input[type="checkbox"] {
 <li><strong>Transparencia</strong>: ¿El artículo proporciona información sobre los posibles conflictos de interés, financiamiento, y otros aspectos relacionados con la transparencia de la investigación?</li>
 </ul>
 </section>
-<section id="análisis-reproducible" class="level1" data-number="3">
-<h1 data-number="3"><span class="header-section-number">3</span> Análisis reproducible</h1>
+<section id="análisis-reproducible" class="level1">
+<h1>Análisis reproducible</h1>
 <p>Seleccionar un resultado específico del artículo (por ejemplo, una tabla de resultados o una figura) y tratar de reproducirlo utilizando los datos y el código proporcionados. Documentar el proceso de reproducción, incluyendo cualquier dificultad encontrada y cómo se resolvió.</p>
-<section id="resultado-a-reproducir" class="level2" data-number="3.1">
-<h2 data-number="3.1" class="anchored" data-anchor-id="resultado-a-reproducir"><span class="header-section-number">3.1</span> Resultado a reproducir</h2>
+<section id="resultado-a-reproducir" class="level2">
+<h2 class="anchored" data-anchor-id="resultado-a-reproducir">Resultado a reproducir</h2>
 <ul>
 <li>Imagen de tabla(s), figura(s) o resultado específico del artículo seleccionado, junto a una breve descripción.</li>
 </ul>
 </section>
-<section id="proceso-de-reproducción" class="level2" data-number="3.2">
-<h2 data-number="3.2" class="anchored" data-anchor-id="proceso-de-reproducción"><span class="header-section-number">3.2</span> Proceso de reproducción</h2>
+<section id="proceso-de-reproducción" class="level2">
+<h2 class="anchored" data-anchor-id="proceso-de-reproducción">Proceso de reproducción</h2>
 <ul>
 <li>Descripción detallada del proceso seguido para reproducir el resultado seleccionado, incluyendo los pasos realizados, las herramientas utilizadas, y cualquier ajuste necesario para lograr la reproducción. Incluye las siguientes sub secciones:</li>
 </ul>
-<section id="procesamiento" class="level3" data-number="3.2.1">
-<h3 data-number="3.2.1" class="anchored" data-anchor-id="procesamiento"><span class="header-section-number">3.2.1</span> Procesamiento</h3>
+<section id="procesamiento" class="level3">
+<h3 class="anchored" data-anchor-id="procesamiento">Procesamiento</h3>
 <ul>
 <li><p>Incluye el código utilizado para procesar los datos, junto con una explicación de cada paso.</p></li>
 <li><p>Los datos originales deben ser llamados desde input/data/original, el código de procesamiento se debe incluir en este mismo archivo (reporte-repro.qmd).</p></li>
 </ul>
 </section>
-<section id="reproducción" class="level3" data-number="3.2.2">
-<h3 data-number="3.2.2" class="anchored" data-anchor-id="reproducción"><span class="header-section-number">3.2.2</span> Reproducción</h3>
+<section id="reproducción" class="level3">
+<h3 class="anchored" data-anchor-id="reproducción">Reproducción</h3>
 <ul>
 <li>Generación de tabla o figura a reproducir.</li>
 </ul>
 </section>
 </section>
 </section>
-<section id="conclusiones" class="level1" data-number="4">
-<h1 data-number="4"><span class="header-section-number">4</span> Conclusiones</h1>
+<section id="conclusiones" class="level1">
+<h1>Conclusiones</h1>
 <p>Basándose en el análisis realizado, escriban una conclusión sobre el nivel de reproducibilidad del artículo seleccionado.</p>
 </section>
-<section id="recomendaciones" class="level1" data-number="5">
-<h1 data-number="5"><span class="header-section-number">5</span> Recomendaciones</h1>
+<section id="recomendaciones" class="level1">
+<h1>Recomendaciones</h1>
 <p>Recomendaciones para mejorar la reproducibilidad del artículo, si es necesario.</p>
 </section>
-<section id="referencias" class="level1" data-number="6">
-<h1 data-number="6"><span class="header-section-number">6</span> Referencias</h1>
+<section id="referencias" class="level1">
+<h1>Referencias</h1>
+<div id="refs" role="list">
+
+</div>
+</section>
+<section id="apéndice" class="level1">
+<h1>Apéndice</h1>
+<section id="material-suplementario" class="level2">
+<h2 class="anchored" data-anchor-id="material-suplementario">Material suplementario</h2>
+<ul>
+<li>Incluyan aquí detalles metodológicos adicionales, en caso de ser necesario</li>
+</ul>
+</section>
+<section id="código" class="level2">
+<h2 class="anchored" data-anchor-id="código">Código</h2>
+<ul>
+<li>Incluir acá el código original, en caso de estar disponible.</li>
+</ul>
+</section>
 </section>
 
 </main>
@@ -240,13 +263,14 @@ ul.task-list li input[type="checkbox"] {
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy

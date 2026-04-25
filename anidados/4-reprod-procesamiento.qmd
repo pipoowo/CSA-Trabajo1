@@ -1,0 +1,14 @@
+---
+title: "Untitled"
+format: html
+---
+
+## Proceso de reproducción
+
+- Descripción detallada del proceso seguido para reproducir el resultado seleccionado, incluyendo los pasos realizados, las herramientas utilizadas, y cualquier ajuste necesario para lograr la reproducción. Incluye las siguientes sub secciones:
+
+### Procesamiento
+
+- Incluye el código utilizado para procesar los datos, junto con una explicación de cada paso. 
+
+- Los datos originales deben ser llamados desde input/data/original, el código de procesamiento se debe incluir en este mismo archivo (reporte-repro.qmd).

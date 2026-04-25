@@ -1,0 +1,12 @@
+---
+title: "Untitled"
+format: html
+---
+
+# Análisis reproducible
+
+Seleccionar un resultado específico del artículo (por ejemplo, una tabla de resultados o una figura) y tratar de reproducirlo utilizando los datos y el código proporcionados. Documentar el proceso de reproducción, incluyendo cualquier dificultad encontrada y cómo se resolvió.
+
+## Resultado a reproducir
+
+- Imagen de tabla(s), figura(s) o resultado específico del artículo seleccionado, junto a una breve descripción.
