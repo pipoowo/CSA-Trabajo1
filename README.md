@@ -33,6 +33,9 @@ CSA-Trabajo1/
  |  |- bib/
  |  |- data/
  |  |  |- original/
+ |  |  |  |- Latinobarometro18_20_LARR.rds
+ |  |  |  |- Latinobarometro_2018_Esp_R_v20190303.rds
+ |  |  |  |- Latinobarometro_2020_Esp_Rdata_v1_0.rdata
  |  |  |- proc/
  |  |- images/
  |  |- original-code/
