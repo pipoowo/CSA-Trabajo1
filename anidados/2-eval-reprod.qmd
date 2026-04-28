@@ -7,8 +7,11 @@ format: html
 
 Análisis detallado del artículo seleccionado, evaluando los siguientes aspectos:
 
-  -   **Disponibilidad de datos y códigos**: Tanto los datos como los códigos usados se encuentran disponibles de forma abierta en la página de publicación del artículo. La página oficial de publicación es [Cambridge University Press](https://doi.org/10.1017/lar.2024.64). Para acceder a esta se debe entrar a Supplementary materials, donde se debe descargar el archivo Word adjunto. Tras descargarlo, en el documento se encuentra un enlace que dirige a un [repositorio de libre acceso](https://osf.io/tdh89/overview?view_only=be70c0c83be948b6bbcc8e8b5a899d91) en el cual se encuentran los archivos mencionados. 
+  -   **Disponibilidad de datos y códigos**: El artículo proporciona acceso a los datos y códigos utilizados en el estudio. Ambos se encuentran disponibles de forma abierta en la página oficial de publicación del artículo correspondiente a [Cambridge University Press](https://doi.org/10.1017/lar.2024.64). Para acceder a esta se debe entrar a Supplementary materials, donde se debe descargar el archivo Word adjunto. Tras descargarlo, en el documento se encuentra un enlace que dirige a un [repositorio de libre acceso](https://osf.io/tdh89/overview?view_only=be70c0c83be948b6bbcc8e8b5a899d91) en el cual se encuentran los archivos mencionados. También, dentro del artículo los autores detallan el repositorio y proporcionan el link directo.
 
+  -   **Documentación**: El artículo incluye una descripción clara de los métodos y procedimientos utilizados en el estudio. Los autores especifican la fuente de información (Encuesta Latinobarómetro 2018-2020), detallan la muestra, la construcción de las variables y las decisiones metodológicas. Por lo que es suficiente replicar el estudio.
 
-  -   **Documentación**: ¿El artículo incluye una descripción clara de los métodos y procedimientos utilizados en el estudio? ¿Es suficiente para que otro investigador pueda replicar el estudio?
-  -   **Transparencia**: ¿El artículo proporciona información sobre los posibles conflictos de interés, financiamiento, y otros aspectos relacionados con la transparencia de la investigación?   
+  -   **Transparencia**: El artículo es transparente sobre el respaldo académico. Se declara explícitamente que el proyecto fue financiado por ANID/FONDECYT REGULAR 1230056 (“Clases sociales, movimientos obreros y conflicto en tiempos de crisis: Un estudio comparativo de Argentina y Chile”, IP: Pablo Pérez Ahumada) y por COES ANID/FONDAP 1523A0005.
+  Además, los autores mencionan que el texto es un artículo de acceso abierto, distribuido bajo los términos de la licencia Creative Commons Attribution lo que permite su libre lectura, distribución y reproducción.
+  Por último, se menciona que los autores son parte de instituciones como la Universidad de Chile y Centro de Estudios de Conflicto y Cohesión Social.
+ 
