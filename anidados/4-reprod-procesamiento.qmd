@@ -15,6 +15,8 @@ format: html
 
 
 ```{r}
+#| echo: true
+#| eval: false
 pacman::p_load(dplyr,       # Manipulacion de datos 
                haven,       # importar datos en .dta o .sav
                car,         # recodificar variables
