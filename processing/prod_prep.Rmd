@@ -60,7 +60,7 @@ Para este ejemplo se va utilizar una base de datos proveniente del paquete `carD
 > The Chile data frame has 2700 rows and 8 columns. The data are from a national survey conducted in April and May of 1988 by FLACSO/Chile. There are some missing data.
 
 ```{r echo=TRUE}
-df<- carData::Chile
+df1 <- load(file = "../input/data/proc/df_final.Rdata" )
 df1 <- df %>% select(zona=region,
                      poblacion=population,
                      sexo=sex,
