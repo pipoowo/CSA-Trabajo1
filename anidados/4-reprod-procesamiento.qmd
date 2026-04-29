@@ -23,15 +23,19 @@ pacman::p_load(dplyr,       # Manipulacion de datos
                sjlabelled,  # etiquetado de variables
                sjmisc,      # descriptivos y frecuencias
                sjPlot,      # tablas, plots y descriptivos
-               summarytools # resumen de dataframe
+               summarytools, # resumen de dataframe
+               readxl        # base de datos xlsx
                )
 
 options(scipen = 999)
 rm(list = ls())
 
-lb_2018 <- readRDS("input/data/original/Latinobarometro_2018_Esp_R_v20190303.rds")
-load("input/data/original/Latinobarometro_2020_Esp_Rdata_v1_0.rdata")
+lb_2018 <- readRDS("input/Latinobarometro_2018_Esp_R_v20190303.rds")
+load("input/Latinobarometro_2020_Esp_Rdata_v1_0.rdata")
 lb_2020 <- Latinobarometro_2020_Esp
+
+Latinobarometro18_20_LARR<- readRDS(file = "input/Latinobarometro18_20_LARR.rds")
+Latinobarometro18_20_LARR <- as.data.frame(Latinobarometro18_20_LARR)
 
 #---- 3. Limpieza de variables: latinobarómetro 2018 ----
 ##---- 3.1. Seleccionar variables ----
@@ -118,30 +122,11 @@ datos_2018 <- datos_2018 %>%
     sexo == -2 ~ NA
   ))
 
-library(dplyr)
-
-##--- 3.8 ciudad ----
+##--- 3.8 Edad ----
 datos_2018 <- datos_2018 %>%
-  mutate(pais = case_when(
-    pais == 32  ~ "ARG",
-    pais == 68  ~ "BOL",
-    pais == 76  ~ "BRA",
-    pais == 152 ~ "CHL",
-    pais == 170 ~ "COL",
-    pais == 188 ~ "CRI",
-    pais == 214 ~ "DOM",
-    pais == 218 ~ "ECU",
-    pais == 222 ~ "SLV",
-    pais == 320 ~ "GTM",
-    pais == 340 ~ "HND",
-    pais == 484 ~ "MEX",
-    pais == 558 ~ "NIC",
-    pais == 591 ~ "PAN",
-    pais == 600 ~ "PRY",
-    pais == 604 ~ "PER",
-    pais == 858 ~ "URY",
-    pais == 862 ~ "VEN",
-    TRUE ~ NA
+  mutate(edad = case_when(
+    edad < 1 ~ NA,
+    TRUE ~ edad
   ))
 
 #---- 4. Limpieza de variables: latinobarómetro 2020 ----
@@ -189,6 +174,7 @@ datos_2020 <- datos_2020 %>%
     TRUE ~ NA
   ))
 
+
 ##--- 4.5 Posición política ----
 
 datos_2020 <- datos_2020 %>% 
@@ -200,16 +186,16 @@ datos_2020 <- datos_2020 %>%
     TRUE ~ NA
   ))
 
+
 ##--- 4.6 Confianza en instituciones políticas ----
 
 datos_2020 <- datos_2020 %>%
   mutate(
-    conf_congreso = case_when(conf_congreso %in% c(0, 8) ~ NA, TRUE ~ conf_congreso),
-    conf_gob      = case_when(conf_gob %in% c(0, 8) ~ NA, TRUE ~ conf_gob),
-    conf_partido  = case_when(conf_partido %in% c(0, 8) ~ NA, TRUE ~ conf_partido)
+    conf_congreso = case_when(conf_congreso %in% c(-1, -2, -3, -4) ~ NA, TRUE ~ conf_congreso),
+    conf_gob      = case_when(conf_gob %in% c(-1, -2, -3, -4) ~ NA, TRUE ~ conf_gob),
+    conf_partido  = case_when(conf_partido %in% c(-1, -2, -3, -4) ~ NA, TRUE ~ conf_partido)
   ) %>%
-  mutate(datos_2020,
-                conf_congreso = 4 - conf_congreso,
+  mutate(conf_congreso = 4 - conf_congreso,
                 conf_gob = 4 - conf_gob,
                 conf_partido = 4 - conf_partido,
                 conf_instituciones = conf_congreso + conf_gob + conf_partido
@@ -224,37 +210,68 @@ datos_2020 <- datos_2020 %>%
     TRUE ~ NA
   ))
 
-##--- 4.8 ciudad ----
+datos_2020$sexo <- set_labels(datos_2020$sexo,labels = c("Hombre" = 0,
+                                           "Mujer" = 1))
 
+##--- 4.8 Edad ----
 datos_2020 <- datos_2020 %>%
-  mutate(pais = case_when(
-    pais == 32  ~ "ARG",
-    pais == 68  ~ "BOL",
-    pais == 76  ~ "BRA",
-    pais == 152 ~ "CHL",
-    pais == 170 ~ "COL",
-    pais == 188 ~ "CRI",
-    pais == 214 ~ "DOM",
-    pais == 218 ~ "ECU",
-    pais == 222 ~ "SLV",
-    pais == 320 ~ "GTM",
-    pais == 340 ~ "HND",
-    pais == 484 ~ "MEX",
-    pais == 558 ~ "NIC",
-    pais == 591 ~ "PAN",
-    pais == 600 ~ "PRY",
-    pais == 604 ~ "PER",
-    pais == 858 ~ "URY",
-    pais == 862 ~ "VEN",
-    TRUE ~ NA
+  mutate(edad = case_when(
+    edad < 1 ~ NA,
+    TRUE ~ edad
   ))
 
-##--- 5. Unir las bases de datos ----
+#--- 5. Unir las bases de datos ----
 datos_2018 <- datos_2018 %>% mutate(ano = 2018)
 datos_2020 <- datos_2020 %>% mutate(ano = 2020)
 
 datos_lb <- bind_rows(datos_2018, datos_2020)
 
 datos_lb_proc <- na.omit(datos_lb)
+
+#--- 6. Etiquetar variables ----
+datos_lb_proc$conf_sindicato_dic <- set_labels(datos_lb_proc$conf_sindicato_dic,labels = c("Mucha o algo de confianza" = 1,
+                                           "Poca o nada de confianza" = 0
+                                           ))
+
+datos_lb_proc$clase_social <- set_labels(datos_lb_proc$clase_social,labels = c("Grandes empleadores" = 1,
+                                           "Pequeños empleadores" = 2,
+                                           "Pequeña burguesía" = 3,
+                                           "Clase media" = 4,
+                                           "Clase Trabajadora" = 5,
+                                           "Autoempleados informales" = 6
+                                          ))
+
+datos_lb_proc$posicion_pol_ord <- set_labels(datos_lb_proc$posicion_pol_ord,labels = c("Izquierda" = 1,
+                                           "Centro" = 2,
+                                           "Derecha" = 3,
+                                           "Sin identificación" = 4
+                                          ))
+
+datos_lb_proc$sexo <- set_labels(datos_lb_proc$sexo,labels = c("Hombre" = 0,
+                                           "Mujer" = 1))
+
+datos_lb_proc$pais <- set_labels(datos_lb_proc$pais,labels = c(
+    "ARG" = 32,
+    "BOL" = 68,
+    "BRA" = 76,
+    "CHL" = 152,
+    "COL"= 170,
+    "CRI" = 188,
+    "DOM" = 214,
+    "ECU" = 218,
+    "SLV" = 222,
+    "GTM" = 320,
+    "HND" = 340,
+    "MEX" = 484,
+    "NIC" = 558,
+    "PAN" = 591,
+    "PRY" = 600,
+    "PER" = 604,
+    "URY" = 858,
+    "VEN" = 862
+  ))
+
+datos_lb_proc <- datos_lb_proc %>%
+  mutate(pais = as.character(as_label(pais)))
 
 ```
