@@ -383,7 +383,10 @@ datos_lb_proc <- na.omit(datos_lb)
 ```
 
 **PASO 6:**
+
 ```{r}
+#| echo: true
+#| eval: false
 #--- 6. Etiquetar variables ----
 datos_lb_proc$conf_sindicato_dic <- set_labels(datos_lb_proc$conf_sindicato_dic,labels = c("Mucha o algo de confianza" = 1,
                                            "Poca o nada de confianza" = 0
