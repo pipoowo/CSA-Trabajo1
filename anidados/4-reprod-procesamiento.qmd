@@ -63,7 +63,7 @@ En primer lugar, se seleccionan las variables necesarias para trabajar.
 
 datos_2018 <- select(lb_2018, 
                 P16NC.C, #Conf. en sindicatos
-                S14A, S15, REEDUC.1, S4, #Clase social: sit. ocupacional; tipo de trabajo; nivel educacional; ingreso subjetivo
+                S14A, S14B, S15, REEDUC.1, S4, #Clase social: sit. ocupacional; tipo de trabajo; nivel educacional; ingreso subjetivo
                 P22ST, #Posici+on política
                 P15STGBSC.D, P15STGBSC.E, P15STGBSC.G, #Conf en: congreso, gob. y partidos políticos
                 SEXO,
@@ -82,7 +82,8 @@ Luego para facilitar la lectura y el manejo de las variables, se renombran a pal
 datos_2018 <- rename(datos_2018, 
                 conf_sindicato = P16NC.C, 
                 situacion_ocupacional = S14A,
-                tipo_trabajo = S15,
+                tipo_trabajo_a = S15,
+                tipo_trabajo_b = S14B,
                 nivel_educ = REEDUC.1, 
                 ing_subj = S4, 
                 posicion_pol = P22ST, 
@@ -124,12 +125,12 @@ La quinta categoría es la clase trabajadora que se define como el grupo de asal
 
 datos_2018 <- datos_2018 %>% 
   mutate(clase_social = case_when(
-    situacion_ocupacional == 1 & tipo_trabajo == 2 & ing_subj == 1 ~ 1, #grandes empleadores: independiente + dueño de empresa + ingreso
-    situacion_ocupacional == 1 & tipo_trabajo == 2 & ing_subj %in% c(2, 3, 4) ~ 2, #pequeños empleadores: independiente + dueño de empresa + ingreso
-    situacion_ocupacional == 1 & tipo_trabajo %in% c(1, 3, 4) & nivel_educ == 3 ~ 3, #pequeña burguesía: autoempleado + profesional
-    situacion_ocupacional %in% c(2, 3) & tipo_trabajo %in% c(5, 6, 7, 8) & nivel_educ == 3 ~ 4, #clase media: asalariado + profesional
-    situacion_ocupacional %in% c(2, 3) & tipo_trabajo %in% c(5, 6, 7, 8) & nivel_educ %in% c(1, 2) ~ 5, #clase trabajadora: asalariado + no profesional
-    situacion_ocupacional == 1 & tipo_trabajo %in% c(1, 3, 4) & nivel_educ %in% c(1, 2) ~ 6, #autoempleados informales: autoempleado + no profesional
+    situacion_ocupacional %in% c(1, 4, 5) & (tipo_trabajo_a == 2 | tipo_trabajo_b == 2) & ing_subj == 1 ~ 1, #grandes empleadores: independiente + dueño de empresa + ingreso
+    situacion_ocupacional %in% c(1, 4, 5) & (tipo_trabajo_a == 2 | tipo_trabajo_b == 2) & ing_subj %in% c(2, 3, 4) ~ 2, #pequeños empleadores: independiente + dueño de empresa + ingreso
+    situacion_ocupacional %in% c(1, 4, 5) & (tipo_trabajo_a %in% c(1, 3, 4) | tipo_trabajo_b %in% c(1, 3, 4)) & nivel_educ == 3 ~ 3, #pequeña burguesía: autoempleado + profesional
+    situacion_ocupacional %in% c(2, 3, 4, 5) & (tipo_trabajo_a %in% c(5, 6, 7, 8) | tipo_trabajo_b %in% c(5, 6, 7, 8)) & nivel_educ == 3 ~ 4, #clase media: asalariado + profesional
+    situacion_ocupacional %in% c(2, 3, 4, 5) & (tipo_trabajo_a %in% c(5, 6, 7, 8) | tipo_trabajo_b %in% c(5, 6, 7, 8)) & nivel_educ %in% c(1, 2) ~ 5, #clase trabajadora: asalariado + no profesional
+    situacion_ocupacional %in% c(1, 4, 5) & (tipo_trabajo_a %in% c(1, 3, 4) | tipo_trabajo_b %in% c(1, 3, 4)) & nivel_educ %in% c(1, 2) ~ 6, #autoempleados informales: autoempleado + no profesional
     TRUE ~ NA
   ))
 
@@ -147,7 +148,7 @@ datos_2018 <- datos_2018 %>%
     posicion_pol %in% c(0, 1, 2, 3) ~ 1, #Izquierda
     posicion_pol %in% c(4, 5, 6) ~ 2, #centro
     posicion_pol %in% c(7, 8, 9, 10) ~ 3, #derecha
-    posicion_pol %in% c(-1, -4, -6) ~ 4, #sin identificación
+    posicion_pol %in% c(-1, -2, -6) ~ 4, #sin identificación
     TRUE ~ NA
   ))
 
@@ -178,7 +179,7 @@ datos_2018 <- mutate(datos_2018,
 
 ```
 
-La variable sexo se convierte en una variable dummy , donde 1 es mujer y 0 hombre. Los valores -2 se asignan como NA.
+La variable sexo se convierte en una variable dummy, donde 1 es mujer y 0 hombre. Los valores -2 se asignan como NA.
 
 ```{r}
 #| echo: true
@@ -194,38 +195,20 @@ datos_2018 <- datos_2018 %>%
 
 ```
 
-
-
-Para los países, se convierten los códigos numéricos en códigos de texto de tres letras.
+La edad se mantiene como variable numérica, pero se asigna NA a los valores menores a 1.
 ```{r}
 #| echo: true
 #| eval: false
-library(dplyr)
-
-##--- 3.8 ciudad ----
+##--- 3.8 Edad ----
 datos_2018 <- datos_2018 %>%
-  mutate(pais = case_when(
-    pais == 32  ~ "ARG",
-    pais == 68  ~ "BOL",
-    pais == 76  ~ "BRA",
-    pais == 152 ~ "CHL",
-    pais == 170 ~ "COL",
-    pais == 188 ~ "CRI",
-    pais == 214 ~ "DOM",
-    pais == 218 ~ "ECU",
-    pais == 222 ~ "SLV",
-    pais == 320 ~ "GTM",
-    pais == 340 ~ "HND",
-    pais == 484 ~ "MEX",
-    pais == 558 ~ "NIC",
-    pais == 591 ~ "PAN",
-    pais == 600 ~ "PRY",
-    pais == 604 ~ "PER",
-    pais == 858 ~ "URY",
-    pais == 862 ~ "VEN",
-    TRUE ~ NA
+  mutate(edad = case_when(
+    edad < 1 ~ NA,
+    TRUE ~ edad
   ))
 ```
+
+Para los países, se convierten los códigos numéricos en códigos de texto de tres letras.
+
 
 **PASO 4: Limpieza de variables latinobarómetro 2020**
 
@@ -238,7 +221,7 @@ Se realiza el mismo procedimiento que en el paso 3.
 ##---- 4.1. Seleccionar variables ----
 datos_2020 <- select(lb_2020, 
                 p15st.c, #Conf. en sindicatos
-                s24.a, s25, reeduc.1, s4, #Clase social: sit. ocupacional; tipo de trabajo; nivel educacional; ingreso subjetivo
+                s24.a, s25, s24.b, reeduc.1, s4, #Clase social: sit. ocupacional; tipo de trabajo; nivel educacional; ingreso subjetivo
                 p18st, #Posici+on política
                 p13st.d, p13st.e, p13st.g, #Conf en: congreso, gob. y partidos políticos
                 sexo,
@@ -254,7 +237,8 @@ datos_2020 <- select(lb_2020,
 datos_2020 <- rename(datos_2020, 
                 conf_sindicato = p15st.c, 
                 situacion_ocupacional = s24.a,
-                tipo_trabajo = s25,
+                tipo_trabajo_a = s25,
+                tipo_trabajo_b = s24.b,
                 nivel_educ = reeduc.1, 
                 ing_subj = s4, 
                 posicion_pol = p18st, 
@@ -270,8 +254,8 @@ datos_2020 <- rename(datos_2020,
 ##--- 4.3 Confianza en sindicatos ----
 datos_2020 <- datos_2020 %>% 
   mutate(conf_sindicato_dic = case_when(
-    conf_sindicato %in% c(1, 2) ~ 1, #mucha o algo de confianza
-    conf_sindicato %in% c(3, 4) ~ 0, #poca o nada de confianza
+    conf_sindicato %in% c(1, 2) ~ 1,
+    conf_sindicato %in% c(3, 4) ~ 0,
     TRUE ~ NA
   ))
 
@@ -285,14 +269,15 @@ datos_2020 <- datos_2020 %>%
 
 datos_2020 <- datos_2020 %>% 
   mutate(clase_social = case_when(
-    situacion_ocupacional == 1 & tipo_trabajo == 2 & ing_subj == 1 ~ 1, #grandes empleadores: independiente + dueño de empresa + ingreso
-    situacion_ocupacional == 1 & tipo_trabajo == 2 & ing_subj %in% c(2, 3, 4) ~ 2, #pequeños empleadores: independiente + dueño de empresa + ingreso
-    situacion_ocupacional == 1 & tipo_trabajo %in% c(1, 3, 4) & nivel_educ == 7 ~ 3, #pequeña burguesía: autoempleado + profesional
-    situacion_ocupacional %in% c(2, 3) & tipo_trabajo %in% c(5, 6, 7, 8) & nivel_educ == 7 ~ 4, #clase media: asalariado + profesional
-    situacion_ocupacional %in% c(2, 3) & tipo_trabajo %in% c(5, 6, 7, 8) & nivel_educ != 7 ~ 5, #clase trabajadora: asalariado + no profesional
-    situacion_ocupacional == 1 & tipo_trabajo %in% c(1, 3, 4) & nivel_educ != 7 ~ 6, #autoempleados informales: autoempleado + no profesional
+    situacion_ocupacional %in% c(1, 4, 5) & (tipo_trabajo_a == 2 | tipo_trabajo_b == 2) & ing_subj == 1 ~ 1, #grandes empleadores: independiente + dueño de empresa + ingreso
+    situacion_ocupacional %in% c(1, 4, 5) & (tipo_trabajo_a == 2 | tipo_trabajo_b == 2) & ing_subj %in% c(2, 3, 4) ~ 2, #pequeños empleadores: independiente + dueño de empresa + ingreso
+    situacion_ocupacional %in% c(1, 4, 5) & (tipo_trabajo_a %in% c(1, 3, 4) | tipo_trabajo_b %in% c(1, 3, 4)) & nivel_educ == 7 ~ 3, #pequeña burguesía: autoempleado + profesional
+    situacion_ocupacional %in% c(2, 3, 4, 5) & (tipo_trabajo_a %in% c(5, 6, 7, 8) | tipo_trabajo_b %in% c(5, 6, 7, 8)) & nivel_educ == 7 ~ 4, #clase media: asalariado + profesional
+    situacion_ocupacional %in% c(2, 3, 4, 5) & (tipo_trabajo_a %in% c(5, 6, 7, 8) | tipo_trabajo_b %in% c(5, 6, 7, 8)) & nivel_educ != 7 ~ 5, #clase trabajadora: asalariado + no profesional
+    situacion_ocupacional %in% c(1, 4, 5) & (tipo_trabajo_a %in% c(1, 3, 4) | tipo_trabajo_b %in% c(1, 3, 4)) & nivel_educ != 7 ~ 6, #autoempleados informales: autoempleado + no profesional
     TRUE ~ NA
   ))
+
 
 
 ```
@@ -307,10 +292,9 @@ datos_2020 <- datos_2020 %>%
     posicion_pol %in% c(0, 1, 2, 3) ~ 1, #Izquierda
     posicion_pol %in% c(4, 5, 6) ~ 2, #centro
     posicion_pol %in% c(7, 8, 9, 10) ~ 3, #derecha
-    posicion_pol %in% c(97, 98, 99) ~ 4, #sin identificación
+    posicion_pol %in% c(97, -1, -2) ~ 4, #sin identificación
     TRUE ~ NA
   ))
-
 
 ```
 
@@ -383,7 +367,7 @@ datos_lb_proc <- na.omit(datos_lb)
 ```
 
 **PASO 6:**
-
+Se etiquetan las variables para que sean categóricas. Para la variable confianza en sindicatos, se asignan las etiquetas "Mucha o algo de confianza" al valor 1 y "Poca o nada de confianza" al valor 0. Para la variable clase social, se asignan etiquetas descriptivas a cada una de las seis categorías. Para la variable posición política, se asignan etiquetas a cada una de las cuatro categorías. Para la variable sexo, se asignan las etiquetas "Hombre" y "Mujer" a los valores 0 y 1 respectivamente. Por último, para la variable país, se asignan códigos de texto de tres letras a cada uno de los códigos numéricos originales. Se realizó este paso al final para no tener problemas cuando se unieron ambas bases de datos en el paso 5.
 ```{r}
 #| echo: true
 #| eval: false
@@ -392,45 +376,64 @@ datos_lb_proc$conf_sindicato_dic <- set_labels(datos_lb_proc$conf_sindicato_dic,
                                            "Poca o nada de confianza" = 0
                                            ))
 
-datos_lb_proc$clase_social <- set_labels(datos_lb_proc$clase_social,labels = c("Grandes empleadores" = 1,
-                                           "Pequeños empleadores" = 2,
-                                           "Pequeña burguesía" = 3,
-                                           "Clase media" = 4,
-                                           "Clase Trabajadora" = 5,
-                                           "Autoempleados informales" = 6
-                                          ))
+datos_lb_proc <- datos_lb_proc %>% 
+  mutate(clase_social = case_when(
+    clase_social == 1  ~ "1. Gran empleador", 
+    clase_social == 2  ~ "2. Pequeño empleador",
+    clase_social == 3  ~ "3. Pequeño burgués formal",
+    clase_social == 4  ~ "4. Clase media",
+    clase_social == 5  ~ "5. Obrero",
+    clase_social == 6  ~ "6. Autoempleado informal"))
 
-datos_lb_proc$posicion_pol_ord <- set_labels(datos_lb_proc$posicion_pol_ord,labels = c("Izquierda" = 1,
-                                           "Centro" = 2,
-                                           "Derecha" = 3,
-                                           "Sin identificación" = 4
-                                          ))
+datos_lb_proc <- datos_lb_proc %>% 
+  mutate(posicion_pol_ord = case_when(
+    posicion_pol_ord == 1  ~ "Izquierda", 
+    posicion_pol_ord == 2  ~ "Centro",
+    posicion_pol_ord == 3  ~ "Derecha",
+    posicion_pol_ord == 4  ~ "Ninguno"))
 
-datos_lb_proc$sexo <- set_labels(datos_lb_proc$sexo,labels = c("Hombre" = 0,
-                                           "Mujer" = 1))
+datos_lb_proc <- datos_lb_proc %>% 
+  mutate(sexo = case_when(
+    sexo == 0  ~ "Hombre", 
+    sexo == 1  ~ "Mujer"))
 
-datos_lb_proc$pais <- set_labels(datos_lb_proc$pais,labels = c(
-    "ARG" = 32,
-    "BOL" = 68,
-    "BRA" = 76,
-    "CHL" = 152,
-    "COL"= 170,
-    "CRI" = 188,
-    "DOM" = 214,
-    "ECU" = 218,
-    "SLV" = 222,
-    "GTM" = 320,
-    "HND" = 340,
-    "MEX" = 484,
-    "NIC" = 558,
-    "PAN" = 591,
-    "PRY" = 600,
-    "PER" = 604,
-    "URY" = 858,
-    "VEN" = 862
+datos_lb_proc <- datos_lb_proc %>% 
+  mutate(pais = case_when(
+    pais == 32  ~ "ARG",
+    pais == 68  ~ "BOL",
+    pais == 76  ~ "BRA",
+    pais == 152 ~ "CHL",
+    pais == 170 ~ "COL",
+    pais == 188 ~ "CRI",
+    pais == 214 ~ "DOM",
+    pais == 218 ~ "ECU",
+    pais == 222 ~ "SLV",
+    pais == 320 ~ "GTM",
+    pais == 340 ~ "HND",
+    pais == 484 ~ "MEX",
+    pais == 558 ~ "NIC",
+    pais == 591 ~ "PAN",
+    pais == 600 ~ "PRY",
+    pais == 604 ~ "PER",
+    pais == 858 ~ "URY",
+    pais == 862 ~ "VEN"
   ))
+```
 
-datos_lb_proc <- datos_lb_proc %>%
-  mutate(pais = as.character(as_label(pais)))
+**PASO 7: Guardar base de datos procesada**
+```{r}
+#| echo: true
+#| eval: false
+datos_lb_proc <- select(datos_lb_proc, 
+                conf_sindicato_dic,
+                clase_social,
+                posicion_pol_ord,
+                conf_instituciones,
+                sexo, 
+                edad, 
+                pais, 
+                ano)
+
+saveRDS(datos_lb_proc, file = "input/proc/datos_lb_proc.rds")
 
 ```
