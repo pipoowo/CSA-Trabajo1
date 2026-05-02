@@ -274,7 +274,7 @@ figura2 + plot_annotation(title = "Figura 2: Probabilidad de confiar en un sindi
                                       plot.margin = margin(10, 10, 10, 10)))
 ```
 
-Dentro de las principales dificultades que se encontraron para el proceso de reproducción fue la falta de los códigos relacionados a la limpieza de la base de datos. Esto generó que se realizaran diversos intentos para alcanzar la muestra final de 25.286 casos declarada por los autores.
+Dentro de las principales dificultades que se encontraron para el proceso de reproducción fue la falta de los códigos relacionados a la limpieza de la base de datos.  Esto impidió que, a pesar de los diversos intentos realizados, se pudiera reconstruir la muestra final de 25.286 casos señalada en el artículo original.
 
 En una primera instancia, se obtuvo una muestra de 18.000 casos aproximadamente debido a que no se estaba considerando a las personas que no se encontraban empleadas pero que sí habían otorgado información de su último trabajo en la encuesta. Al solucionar este problema, la muestra aumento a 22.324 datos.
 
