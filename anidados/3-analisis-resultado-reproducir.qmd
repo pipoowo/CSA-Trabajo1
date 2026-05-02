@@ -6,4 +6,10 @@ Seleccionar un resultado específico del artículo (por ejemplo, una tabla de re
 
 - Imagen de tabla(s), figura(s) o resultado específico del artículo seleccionado, junto a una breve descripción.
 
-![Figura 1 original](input/images/figura1_original.png)
+La imagen presenta dos gráficos de líneas (paneles a y b) que ilustran cómo cambia la probabilidad de que las personas confíen en los sindicatos según la clase social y la posición política, comparando los años 2018 (línea gris con círculos) y 2020 (línea negra con triángulos). Ambos gráficos incluyen barras de error que indican la precisión de las estimaciones.
+
+**Panel (a):** Muestra que la confianza en los sindicatos tiende a aumentar progresivamente desde los empleadores hacia la clase trabajadora y la clase media, los cuales presentan los niveles más altos, superando el 30%. Además, se observa que en casi todas las clases sociales hubo una leve caída en la confianza entre 2018 y 2020, excepto en la clase media donde se mantuvo estable.
+
+**Panel (b):** Se observa que la confianza en sindicatos aumenta a medida que la posición se mueve hacia la izquierda. Las personas sin posición política o de derecha muestran menores niveles de confianza (alrededor de 20–25%), mientras que quienes se identifican con la izquierda presentan los niveles más altos (cerca de 30%). Al igual que en el panel anterior, la confianza general en los sindicatos fue ligeramente menor en 2020 en comparación con 2018 para casi todos los grupos políticos.
+
+![](input/images/figura1_original.png)
