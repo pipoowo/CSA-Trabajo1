@@ -278,6 +278,6 @@ Dentro de las principales dificultades que se encontraron para el proceso de rep
 
 En una primera instancia, se obtuvo una muestra de 18.000 casos aproximadamente debido a que no se estaba considerando a las personas que no se encontraban empleadas pero que sí habían otorgado información de su último trabajo en la encuesta. Al solucionar este problema, la muestra aumento a 22.324 datos.
 
-Otra dificultad fue que el libro de códigos estaba erróneo en la encuesta del año AGREGAR, ya que los casos perdidos fueron identificados como 97,98 y 99 pero correspondían a los valores -1 y -2.
+Otra dificultad fue que el libro de códigos del año 2020 identificaba como casos perdidos los valores 97,98 y 99 pero en la encuestas los NA correspondían a los valores -1 y -2.
 
 Además, los autores cambian el nombre de las variables, a veces se utiliza "pequeña burguesía" pero en la base limpia se denomina "pequeño burgués formal" y a "clase trabajadora" se nombra "obrero".
