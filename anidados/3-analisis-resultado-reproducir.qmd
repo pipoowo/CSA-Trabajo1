@@ -5,3 +5,5 @@ Seleccionar un resultado específico del artículo (por ejemplo, una tabla de re
 ## Resultado a reproducir
 
 - Imagen de tabla(s), figura(s) o resultado específico del artículo seleccionado, junto a una breve descripción.
+
+![Figura 1 original](images/figura1_original.png)
