@@ -1,7 +1,5 @@
 ## Proceso de reproducción
 
-- Descripción detallada del proceso seguido para reproducir el resultado seleccionado, incluyendo los pasos realizados, las herramientas utilizadas, y cualquier ajuste necesario para lograr la reproducción. Incluye las siguientes sub secciones:
-
 ### Procesamiento
 
 **Paso 1: Preparación del entorno y carga de paquetes**
@@ -362,8 +360,10 @@ datos_lb_proc <- na.omit(datos_lb)
 
 ```
 
-**PASO 6:**
-Se etiquetan las variables para que sean categóricas. Para la variable confianza en sindicatos, se asignan las etiquetas "Mucha o algo de confianza" al valor 1 y "Poca o nada de confianza" al valor 0. Para la variable clase social, se asignan etiquetas descriptivas a cada una de las seis categorías. Para la variable posición política, se asignan etiquetas a cada una de las cuatro categorías. Para la variable sexo, se asignan las etiquetas "Hombre" y "Mujer" a los valores 0 y 1 respectivamente. Por último, para la variable país, se asignan códigos de texto de tres letras a cada uno de los códigos numéricos originales. Se realizó este paso al final para no tener problemas cuando se unieron ambas bases de datos en el paso 5.
+**PASO 6: Etiquetar variables **
+En este paso, se etiquetan las variables para que sean categóricas. Esto se realizó al final para no tener problemas cuando se unieron ambas bases de datos en el paso 5.
+
+ Para la variable confianza en sindicatos, se asignan las etiquetas "Mucha o algo de confianza" al valor 1 y "Poca o nada de confianza" al valor 0.
 ```{r}
 #| echo: true
 #| eval: false
@@ -373,6 +373,10 @@ datos_lb_proc$conf_sindicato_dic <- set_labels(datos_lb_proc$conf_sindicato_dic,
                                            ))
 ```
 
+Para la variable clase social, se asignan etiquetas descriptivas a cada una de las seis categorías.
+```{r}
+#| echo: true
+#| eval: false
 datos_lb_proc <- datos_lb_proc %>% 
   mutate(clase_social = case_when(
     clase_social == 1  ~ "1. Gran empleador", 
@@ -381,19 +385,36 @@ datos_lb_proc <- datos_lb_proc %>%
     clase_social == 4  ~ "4. Clase media",
     clase_social == 5  ~ "5. Obrero",
     clase_social == 6  ~ "6. Autoempleado informal"))
+```
 
+Para la variable posición política, se asignan etiquetas a cada una de las cuatro categorías.
+```{r}
+#| echo: true
+#| eval: false
 datos_lb_proc <- datos_lb_proc %>% 
   mutate(posicion_pol_ord = case_when(
     posicion_pol_ord == 1  ~ "Izquierda", 
     posicion_pol_ord == 2  ~ "Centro",
     posicion_pol_ord == 3  ~ "Derecha",
     posicion_pol_ord == 4  ~ "Ninguno"))
+```
 
+ Para la variable sexo, se asignan las etiquetas "Hombre" y "Mujer" a los valores 0 y 1 respectivamente.
+
+```{r}
+#| echo: true
+#| eval: false
 datos_lb_proc <- datos_lb_proc %>% 
   mutate(sexo = case_when(
     sexo == 0  ~ "Hombre", 
     sexo == 1  ~ "Mujer"))
+```
 
+Por último, para la variable país, se asignan códigos de texto de tres letras a cada uno de los códigos numéricos originales. 
+
+```{r}
+#| echo: true
+#| eval: false
 datos_lb_proc <- datos_lb_proc %>% 
   mutate(pais = case_when(
     pais == 32  ~ "ARG",
@@ -418,6 +439,7 @@ datos_lb_proc <- datos_lb_proc %>%
 ```
 
 **PASO 7: Guardar base de datos procesada**
+Se guarda la base de datos procesada que incluye la combinación de las variables de la base de datos de Latinobarómetro de los años 2018 y 2020.
 ```{r}
 #| echo: true
 #| eval: false
