@@ -273,3 +273,11 @@ figura2 + plot_annotation(title = "Figura 2: Probabilidad de confiar en un sindi
                         theme = theme(plot.title = element_text(size = 16, face = "bold", hjust = 0.5, margin = margin(b = 12)),
                                       plot.margin = margin(10, 10, 10, 10)))
 ```
+
+Dentro de las principales dificultades que se encontraron para el proceso de reproducción fue la falta de los códigos relacionados a la limpieza de la base de datos. Esto generó que se realizaran diversos intentos para alcanzar la muestra final de 25.286 casos declarada por los autores.
+
+En una primera instancia, se obtuvo una muestra de 18.000 casos aproximadamente debido a que no se estaba considerando a las personas que no se encontraban empleadas pero que sí habían otorgado información de su último trabajo en la encuesta. Al solucionar este problema, la muestra aumento a 22.324 datos.
+
+Otra dificultad fue que el libro de códigos estaba erróneo en la encuesta del año AGREGAR, ya que los casos perdidos fueron identificados como 97,98 y 99 pero correspondían a los valores -1 y -2.
+
+Además, los autores cambian el nombre de las variables, a veces se utiliza "pequeña burguesía" pero en la base limpia se denomina "pequeño burgués formal" y a "clase trabajadora" se nombra "obrero".
