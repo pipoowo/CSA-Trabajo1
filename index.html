@@ -197,10 +197,11 @@ div.csl-indent {
 </ul>
 <p>El artículo investiga los factores individuales y contextuales que explican el nivel de confianza de la ciudadanía en los sindicatos latinoamericanos, para esto se utilizan los datos de la encuesta Latinobarómetro de los años 2018 y 2020. Los autores demuestran que, a nivel individual, la confianza sindical es significativamente mayor entre personas pertenecientes a la clase trabajadora y a la clase media asalariada, así como entre quienes se identifican políticamente con la izquierda y confían más en las instituciones políticas. A nivel contextual, el estudio revela que la legitimidad de los sindicatos varía según el modelo de capitalismo de cada país. La confianza tiende a ser mayor en naciones “neo-desarrollistas” (como Brasil y Uruguay) y más baja en países de “capitalismo tercerizado” (como México y Centroamérica). También encontraron que la confianza en los sindicatos en Chile es alta, siendo un país liberal-rentista con sindicatos débiles, y baja en países redistributivos-rentistas y desarrollistas. Finalmente, los investigadores analizan cómo la confianza en los sindicatos depende de variables contextuales como la informalidad laboral, la inflación, el nivel de desempleo y las movilizaciones sociales.</p>
 <ul>
-<li>Justificación de la selección del artículo La elección de este artículo se fundamenta por tres motivos principales: su relevancia regional, su aporte teórico e interdisciplinario, y su potencial para el ejercicio de reproducibilidad. En relación a su relevancia regional, este artículo aborda una temática clave para comprender la cohesión social y las dinámicas de la política laboral en América Latina, ya que al analizar cómo los diferentes modelos económicos impactan en la sociedad, permite enriquecer el debate y generar evidencia sobre la percepción que se tiene de las organizaciones de los trabajadores en la región. En segundo lugar, el texto propone una articulación analítica entre las clases sociales, los tipos de capitalismo y la legitimidad social de los sindicatos. Por último, el artículo resulta especialmente adecuado para este ejercicio porque los autores declaran haber liberado sus datos y códigos en un repositorio público, lo que en principio facilita la posibilidad de replicar los análisis y verificar sus resultados.</li>
-</ul></section><section id="evaluación-de-reproducibilidad" class="level1" data-number="2"><h1 data-number="2">
+<li>Justificación de la selección del artículo</li>
+</ul>
+<p>La elección de este artículo se fundamenta por tres motivos principales: su relevancia regional, su aporte teórico e interdisciplinario, y su potencial para el ejercicio de reproducibilidad. En relación a su relevancia regional, este artículo aborda una temática clave para comprender la cohesión social y las dinámicas de la política laboral en América Latina, ya que al analizar cómo los diferentes modelos económicos impactan en la sociedad, permite enriquecer el debate y generar evidencia sobre la percepción que se tiene de las organizaciones de los trabajadores en la región. En segundo lugar, el texto propone una articulación analítica entre las clases sociales, los tipos de capitalismo y la legitimidad social de los sindicatos. Por último, el artículo resulta especialmente adecuado para este ejercicio porque los autores declaran haber liberado sus datos y códigos en un repositorio público, lo que en principio facilita la posibilidad de replicar los análisis y verificar sus resultados.</p>
+</section><section id="evaluación-de-reproducibilidad" class="level1" data-number="2"><h1 data-number="2">
 <span class="header-section-number">2</span> Evaluación de reproducibilidad</h1>
-<p>Análisis detallado del artículo seleccionado, evaluando los siguientes aspectos:</p>
 <ul>
 <li><p><strong>Disponibilidad de datos y códigos</strong>: El artículo proporciona acceso a los datos y códigos utilizados en el estudio. Ambos se encuentran disponibles de forma abierta en la página oficial de publicación del artículo correspondiente a <a href="https://doi.org/10.1017/lar.2024.64">Cambridge University Press</a>. Para acceder a esta se debe entrar a Supplementary materials, donde se debe descargar el archivo Word adjunto. Tras descargarlo, en el documento se encuentra un enlace que dirige a un <a href="https://osf.io/tdh89/overview?view_only=be70c0c83be948b6bbcc8e8b5a899d91">repositorio de libre acceso</a> en el cual se encuentran los archivos mencionados. También, dentro del artículo los autores detallan el repositorio y proporcionan el link directo.</p></li>
 <li><p><strong>Documentación</strong>: El artículo incluye una descripción clara de los métodos y procedimientos utilizados en el estudio. Los autores especifican la fuente de información (Encuesta Latinobarómetro 2018-2020), detallan la muestra, la construcción de las variables y las decisiones metodológicas. Por lo que es suficiente replicar el estudio.</p></li>
@@ -362,7 +363,6 @@ div.csl-indent {
 <span>  <span class="op">)</span><span class="op">)</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<p>Para los países, se convierten los códigos numéricos en códigos de texto de tres letras.</p>
 <p><strong>PASO 4: Limpieza de variables latinobarómetro 2020</strong></p>
 <p>Se realiza el mismo procedimiento y lógica que en el paso 3 pero con ciertas diferencias en el nombre y los valores de las variables en la base de datos.</p>
 <p>Primero, se seleccionan las variables.</p>
@@ -396,6 +396,7 @@ div.csl-indent {
 <span>                pais <span class="op">=</span> <span class="va">idenpa</span><span class="op">)</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
+<p>Las variables confianza en sindicatos y clase social se construyen de la misma manera que en el paso 3.</p>
 <div class="cell">
 <details class="code-fold"><summary>Show the code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">##--- 4.3 Confianza en sindicatos ----</span></span>
 <span><span class="va">datos_2020</span> <span class="op">&lt;-</span> <span class="va">datos_2020</span> <span class="op">%&gt;%</span> </span>
@@ -452,6 +453,7 @@ div.csl-indent {
 <span>                <span class="op">)</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
+<p>Las variables sexo y edad también se construyen de la misma manera que en el paso 3.</p>
 <div class="cell">
 <details class="code-fold"><summary>Show the code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">##--- 4.7 Sexo (1 = mujer) ----</span></span>
 <span></span>
@@ -472,7 +474,7 @@ div.csl-indent {
 <span>  <span class="op">)</span><span class="op">)</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<p><strong>PASO 5: unir las bases de datos</strong></p>
+<p><strong>PASO 5: Unir las bases de datos</strong></p>
 <p>Primero, se le agrega a cada base de datos una columna nueva correspondiente al año para poder identificarlas al momento de unirlas. Luego, si juntan las bases de datos. Por último, se elimina cualquier dato que esté como NA.</p>
 <div class="cell">
 <details class="code-fold"><summary>Show the code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">##--- 5. Unir las bases de datos ----</span></span>
@@ -484,7 +486,8 @@ div.csl-indent {
 <span><span class="va">datos_lb_proc</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/na.fail.html">na.omit</a></span><span class="op">(</span><span class="va">datos_lb</span><span class="op">)</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<p><strong>PASO 6: Etiquetar variables </strong> En este paso, se etiquetan las variables para que sean categóricas. Esto se realizó al final para no tener problemas cuando se unieron ambas bases de datos en el paso 5.</p>
+<p><strong>PASO 6: Etiquetar variables</strong></p>
+<p>En este paso, se etiquetan las variables para que sean categóricas. Esto se realizó al final para no tener problemas cuando se unieron ambas bases de datos en el paso 5.</p>
 <p>Para la variable confianza en sindicatos, se asignan las etiquetas “Mucha o algo de confianza” al valor 1 y “Poca o nada de confianza” al valor 0.</p>
 <div class="cell">
 <details class="code-fold"><summary>Show the code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">#--- 6. Etiquetar variables ----</span></span>
@@ -548,7 +551,8 @@ div.csl-indent {
 <span>  <span class="op">)</span><span class="op">)</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<p><strong>PASO 7: Guardar base de datos procesada</strong> Se guarda la base de datos procesada que incluye la combinación de las variables de la base de datos de Latinobarómetro de los años 2018 y 2020.</p>
+<p><strong>PASO 7: Guardar base de datos procesada</strong></p>
+<p>Se guarda la base de datos procesada que incluye la combinación de las variables de la base de datos de Latinobarómetro de los años 2018 y 2020.</p>
 <div class="cell">
 <details class="code-fold"><summary>Show the code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">datos_lb_proc</span> <span class="op">&lt;-</span> <span class="fu">select</span><span class="op">(</span><span class="va">datos_lb_proc</span>, </span>
 <span>                <span class="va">conf_sindicato_dic</span>,</span>
