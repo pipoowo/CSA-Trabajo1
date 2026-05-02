@@ -37,6 +37,7 @@ CSA-Trabajo1/
  |  |  |  |- Latinobarometro_2018_Esp_R_v20190303.rds
  |  |  |  |- Latinobarometro_2020_Esp_Rdata_v1_0.rdata
  |  |  |- proc/
+ |  |  |  |- datos_lb_proc.rds
  |  |- images/
  |  |- original-code/
  |- libs/

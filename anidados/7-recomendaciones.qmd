@@ -1,11 +1,7 @@
----
-title: "Untitled"
-format: html
----
-
 # Recomendaciones
 
-Recomendaciones para mejorar la reproducibilidad del artículo, si es necesario.
+En cuanto a las recomendaciones específicas para fortalecer la reproducibilidad de esta investigación, resulta fundamental que los autores incorporen al repositorio la totalidad de los datos y scripts utilizados. Actualmente, el repositorio solo dispone de la base de datos procesada (que unifica las bases de ambos años), junto con los códigos de análisis individual y contextual, además de las variables contextuales, sin embargo, faltan las bases de datos originales de los años 2018 y 2020, así como el código empleado en la limpieza de los datos. De forma complementaria, el artículo debería integrar una explicación exhaustiva de este procedimiento, de modo que incluso sin disponer del código exacto, el proceso pueda ser replicado.
 
-solo pone la operacionalización para la variable 2020
-falta los códigos de la limpieza de datos
+Asimismo, es necesario que se profundice en la operacionalización de las variables, proporcionando especificaciones para cada año de estudio en particular. Debido a que los códigos de las variables del Latinobarómetro varían entre sus versiones, resulta insuficiente que el artículo solo se mencione la forma en que se operacionalizan para el año 2020. En este sentido, se requiere además una clarificación sobre la variable clase social, puesto que su definición operacional es ambigua y no permite entender con precisión cómo se distribuyeron los casos entre las 6 categorías del esquema de clases de Wright. 
+
+Por último, se deben explicitar decisiones metodológicas claves, tales como el tratamiento de los casos perdidos (NAs). La omisión  de esta información no permite comprender la lógica bajo la cual se filtraron los datos, lo cual es necesario para alcanzar la muestra final de 25.286 observaciones reportadas. Explicitar esto permite que cualquier intento por reproducir los resultados de esta investigación pueda llegar a los mismos hallazgos, incluyendo la replicación de las tablas y gráficos que se muestran a lo largo del texto.
