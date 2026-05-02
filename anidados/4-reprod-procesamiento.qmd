@@ -95,7 +95,7 @@ datos_2018 <- rename(datos_2018,
 
 ```
 
-Para la variable confianza en sindicatos, se recodifica a una variable dicotómica. Si la respuesta original era 1 o 2 (mucha o algo de confianza), se le asigna el valor 1. Por el contrario, si el valor era 2 o 4 (poco o nada de confianza), se le asigna el valor 0. También se le asigna NA a los valores pérdidos.
+Para la variable confianza en sindicatos, se recodifica a una variable dicotómica. Si la respuesta original era 1 o 2 (mucha o algo de confianza), se le asigna el valor 1. Por el contrario, si el valor era 3 o 4 (poco o nada de confianza), se le asigna el valor 0. También se le asigna NA a los valores pérdidos.
 
 ```{r}
 #| echo: true
@@ -111,11 +111,12 @@ datos_2018 <- datos_2018 %>%
 
 ```
 
-Para la variable clase social se crearon seis categorías basado en el esquema de Erik O. Wright. La primera categoría corresponde a grandes empleadores y se construye identificando quienes son independientes (valor 1 de la variable situación ocupacional), dueños de empresa (valor 2 de la variable tipo de trabajo) y poseen un el valor 1 de la variable ingreso subjetivo.
-La segunda categoría es pequeños empleadores definidos por trabajadores independientes, dueños de empresa y cuyos ingresos son (valores 2,3,4 de ingreso subjetivo).
+Para la variable clase social se crearon seis categorías basado en el esquema de Erik O. Wright. La primera categoría corresponde a grandes empleadores y se construye identificando quienes son independientes (valor 1 de la variable situación ocupacional), dueños de empresa (valor 2 de la variable tipo de trabajo), y que además declaran recibir un ingreso subjetivo con el cual "les alcanza bien" y "pueden ahorrar" (valor 1 de la variable ingreso subjetivo). 
+La segunda categoría es pequeños empleadores definidos por trabajadores independientes, dueños de empresa y cuyos ingresos percibidos no les alcanza bien ni les permite ahorrar (valores 2,3,4 de ingreso subjetivo).
 La tercera categoría es la pequeña burguesía y agrupa a los independientes con ocupaciones de autoempleo (1, 3 y 4 de la variable tipo de trabajo) que cuentan con educación profesional (valor 3 de la variable nivel educativo)
 La cuarta categoría corresponde a clase media, que une a los asalariados (valores 2 y 3 de situación ocupacional) en puestos técnicos o de gestión (valores 5, 6, 7 y 8 de la variable tipo de trabajo) y que también poseen formación profesional (valores 3 de nivel educativo).
-La quinta categoría es la clase trabajadora que se define como el grupo de asalariados con puestos técnicos o de gestión pero que no cuentan con educación superior completa (valores 1 y 2 de la variable nivel educativo). Por último, la sexta categoría corresponde a autoempleados informales compuesta por trabajadores independientes en ocupaciones de autoempleo que poseen niveles educativos bajos o medios (valores 1 y 2). Cualquier combinación de datos que no coincida con estos criterios se clasifica como NA.
+La quinta categoría es la clase trabajadora que se define como el grupo de asalariados con puestos técnicos o de gestión pero que no cuentan con educación superior completa (valores 1 y 2 de la variable nivel educativo). 
+Por último, la sexta categoría corresponde a autoempleados informales compuesta por trabajadores independientes en ocupaciones de autoempleo que poseen niveles educativos bajos o medios (valores 1 y 2). Cualquier combinación de datos que no coincida con estos criterios se clasifica como NA.
 
 ```{r}
 #| echo: true
@@ -135,7 +136,7 @@ datos_2018 <- datos_2018 %>%
 
 ```
 
-La variable posición política agrupa una escala de 0 a 10 en tres bloques: los valores 0, 1, 2, 3 originales, se les asigna la categoría 1 izquierda. Los valores 4, 5 y 6 la categoría 2 centro. Los valores 7, 8 ,9 y 10 la categoría 3  derecha. Por último, se clasifica en la categoría 4 los valores negativos sin identificación.
+La variable posición política agrupa una escala de 0 a 10 en tres bloques: los valores 0, 1, 2, 3 originales, se les asigna la categoría 1 izquierda. Los valores 4, 5 y 6 la categoría 2 centro. Los valores 7, 8 ,9 y 10 la categoría 3 derecha. Por último, se clasifica en la categoría 4 los valores negativos -1, -4, -6 que corresponden a sin identificación.
 
 ```{r}
 #| echo: true
@@ -195,7 +196,6 @@ datos_2018 <- datos_2018 %>%
 ```
 
 
-
 Para los países, se convierten los códigos numéricos en códigos de texto de tres letras.
 ```{r}
 #| echo: true
@@ -229,7 +229,9 @@ datos_2018 <- datos_2018 %>%
 
 **PASO 4: Limpieza de variables latinobarómetro 2020**
 
-Se realiza el mismo procedimiento que en el paso 3.
+Se realiza el mismo procedimiento y lógica que en el paso 3 pero con ciertas diferencias en el nombre y los valores de las variables en la base de datos.
+
+Primero, se seleccionan las variables.
 
 ```{r}
 #| echo: true
@@ -246,7 +248,7 @@ datos_2020 <- select(lb_2020,
                 idenpa)
 ```
 
-
+Luego, se renombran para facilitar su uso.
 ```{r}
 #| echo: true
 #| eval: false
@@ -264,6 +266,8 @@ datos_2020 <- rename(datos_2020,
                 pais = idenpa)
 
 ```
+
+
 ```{r}
 #| echo: true
 #| eval: false
@@ -277,6 +281,7 @@ datos_2020 <- datos_2020 %>%
 
 
 ```
+
 
 ```{r}
 #| echo: true
@@ -297,6 +302,7 @@ datos_2020 <- datos_2020 %>%
 
 ```
 
+La variable posición política se constrye igual que en el paso 3, pero la categoría 4 sin identificación contiene los valores 97, 98 y 99 de la base de datos.
 ```{r}
 #| echo: true
 #| eval: false
@@ -314,7 +320,7 @@ datos_2020 <- datos_2020 %>%
 
 ```
 
-
+Para la variable confianza en instituciones políticas, se realiza en primer lugar, la limpieza de las variables confianza en el congreso, confianza en el gobierno y confianza en los partidos, identificando los valores de respuesta no válidos (-1, -2, -3 y -4) y reemplazándolos por NA. Luego, el código invierte la escala de las tres variables restando su valor a 4 y, finalmente, suma los valores de estas variables ya transformadas para crear un índice llamado conf_instituciones.
 ```{r}
 #| echo: true
 #| eval: false
@@ -354,8 +360,6 @@ datos_2020 <- datos_2020 %>%
 ```{r}
 #| echo: true
 #| eval: false
-##--- 4.8 ciudad ----
-
 ##--- 4.8 Edad ----
 datos_2020 <- datos_2020 %>%
   mutate(edad = case_when(
@@ -382,8 +386,10 @@ datos_lb_proc <- na.omit(datos_lb)
 
 ```
 
-**PASO 6:**
+**PASO 6: Etiquetar variables**
+En este paso final, el objetivo es asignar etiquetas descriptivas a los valores numéricos de las variables categóricas y dicotómicas. 
 
+En conf_sindicato_dic, el valor 1 se etiqueta como "mucha o algo de confianza" y el valor 0 como "poca o nada de confianza"
 ```{r}
 #| echo: true
 #| eval: false
@@ -391,7 +397,12 @@ datos_lb_proc <- na.omit(datos_lb)
 datos_lb_proc$conf_sindicato_dic <- set_labels(datos_lb_proc$conf_sindicato_dic,labels = c("Mucha o algo de confianza" = 1,
                                            "Poca o nada de confianza" = 0
                                            ))
+```
 
+En la variable clase_social los números del 1 al 6 se asocian a las categorías "grandes empleadores", "pequeños empleadores", "pequeña burguesía", "clase media", "clase trabajadores" y "autoempleados informales" respectivamente.
+```{r}
+#| echo: true
+#| eval: false
 datos_lb_proc$clase_social <- set_labels(datos_lb_proc$clase_social,labels = c("Grandes empleadores" = 1,
                                            "Pequeños empleadores" = 2,
                                            "Pequeña burguesía" = 3,
@@ -400,15 +411,33 @@ datos_lb_proc$clase_social <- set_labels(datos_lb_proc$clase_social,labels = c("
                                            "Autoempleados informales" = 6
                                           ))
 
+```
+
+Para la variable posicion_pol_ord el valor 1 corresponde a "izquierda", el valor 2 a "centro", el valor 3 a "derecha", y el valor 4 a "sin identificación".
+```{r}
+#| echo: true
+#| eval: false
 datos_lb_proc$posicion_pol_ord <- set_labels(datos_lb_proc$posicion_pol_ord,labels = c("Izquierda" = 1,
                                            "Centro" = 2,
                                            "Derecha" = 3,
                                            "Sin identificación" = 4
                                           ))
 
+```
+
+La variable sexo tiene el valor 0 identificado como "hombre" y el valor 1 como "mujer"
+```{r}
+#| echo: true
+#| eval: false
 datos_lb_proc$sexo <- set_labels(datos_lb_proc$sexo,labels = c("Hombre" = 0,
                                            "Mujer" = 1))
 
+```
+
+Por último, se asignan los valores numéricos a siglas de cada país en un formato de tres letras, y se transforman los códigos a texto.
+```{r}
+#| echo: true
+#| eval: false
 datos_lb_proc$pais <- set_labels(datos_lb_proc$pais,labels = c(
     "ARG" = 32,
     "BOL" = 68,
