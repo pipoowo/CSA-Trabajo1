@@ -4,10 +4,6 @@
 
 ### Procesamiento
 
-- Incluye el código utilizado para procesar los datos, junto con una explicación de cada paso. 
-
-- Los datos originales deben ser llamados desde input/data/original, el código de procesamiento se debe incluir en este mismo archivo (reporte-repro.qmd).
-
 **Paso 1: Preparación del entorno y carga de paquetes**
 
 En primer lugar, se cargan las librerías necesarias con pacman. Luego se desactiva la notación científica para facilitar la lectura de los datos. Por último, se limpia el entorno de trabajo, borrando cualquier objeto o dato que estuviera previamente cargado.
@@ -191,9 +187,7 @@ datos_2018 <- datos_2018 %>%
 
 ```
 
-
-
-Para los países, se convierten los códigos numéricos en códigos de texto de tres letras.
+La edad se mantiene como variable numérica, pero se asigna NA a los valores menores a 1.
 ```{r}
 #| echo: true
 #| eval: false
@@ -369,7 +363,7 @@ datos_lb_proc <- na.omit(datos_lb)
 ```
 
 **PASO 6:**
-
+Se etiquetan las variables para que sean categóricas. Para la variable confianza en sindicatos, se asignan las etiquetas "Mucha o algo de confianza" al valor 1 y "Poca o nada de confianza" al valor 0. Para la variable clase social, se asignan etiquetas descriptivas a cada una de las seis categorías. Para la variable posición política, se asignan etiquetas a cada una de las cuatro categorías. Para la variable sexo, se asignan las etiquetas "Hombre" y "Mujer" a los valores 0 y 1 respectivamente. Por último, para la variable país, se asignan códigos de texto de tres letras a cada uno de los códigos numéricos originales. Se realizó este paso al final para no tener problemas cuando se unieron ambas bases de datos en el paso 5.
 ```{r}
 #| echo: true
 #| eval: false
@@ -379,42 +373,47 @@ datos_lb_proc$conf_sindicato_dic <- set_labels(datos_lb_proc$conf_sindicato_dic,
                                            ))
 ```
 
-datos_lb_proc$clase_social <- set_labels(datos_lb_proc$clase_social,labels = c("Grandes empleadores" = 1,
-                                           "Pequeños empleadores" = 2,
-                                           "Pequeña burguesía" = 3,
-                                           "Clase media" = 4,
-                                           "Clase Trabajadora" = 5,
-                                           "Autoempleados informales" = 6
-                                          ))
+datos_lb_proc <- datos_lb_proc %>% 
+  mutate(clase_social = case_when(
+    clase_social == 1  ~ "1. Gran empleador", 
+    clase_social == 2  ~ "2. Pequeño empleador",
+    clase_social == 3  ~ "3. Pequeño burgués formal",
+    clase_social == 4  ~ "4. Clase media",
+    clase_social == 5  ~ "5. Obrero",
+    clase_social == 6  ~ "6. Autoempleado informal"))
 
-datos_lb_proc$posicion_pol_ord <- set_labels(datos_lb_proc$posicion_pol_ord,labels = c("Izquierda" = 1,
-                                           "Centro" = 2,
-                                           "Derecha" = 3,
-                                           "Sin identificación" = 4
-                                          ))
+datos_lb_proc <- datos_lb_proc %>% 
+  mutate(posicion_pol_ord = case_when(
+    posicion_pol_ord == 1  ~ "Izquierda", 
+    posicion_pol_ord == 2  ~ "Centro",
+    posicion_pol_ord == 3  ~ "Derecha",
+    posicion_pol_ord == 4  ~ "Ninguno"))
 
-datos_lb_proc$sexo <- set_labels(datos_lb_proc$sexo,labels = c("Hombre" = 0,
-                                           "Mujer" = 1))
+datos_lb_proc <- datos_lb_proc %>% 
+  mutate(sexo = case_when(
+    sexo == 0  ~ "Hombre", 
+    sexo == 1  ~ "Mujer"))
 
-datos_lb_proc$pais <- set_labels(datos_lb_proc$pais,labels = c(
-    "ARG" = 32,
-    "BOL" = 68,
-    "BRA" = 76,
-    "CHL" = 152,
-    "COL"= 170,
-    "CRI" = 188,
-    "DOM" = 214,
-    "ECU" = 218,
-    "SLV" = 222,
-    "GTM" = 320,
-    "HND" = 340,
-    "MEX" = 484,
-    "NIC" = 558,
-    "PAN" = 591,
-    "PRY" = 600,
-    "PER" = 604,
-    "URY" = 858,
-    "VEN" = 862
+datos_lb_proc <- datos_lb_proc %>% 
+  mutate(pais = case_when(
+    pais == 32  ~ "ARG",
+    pais == 68  ~ "BOL",
+    pais == 76  ~ "BRA",
+    pais == 152 ~ "CHL",
+    pais == 170 ~ "COL",
+    pais == 188 ~ "CRI",
+    pais == 214 ~ "DOM",
+    pais == 218 ~ "ECU",
+    pais == 222 ~ "SLV",
+    pais == 320 ~ "GTM",
+    pais == 340 ~ "HND",
+    pais == 484 ~ "MEX",
+    pais == 558 ~ "NIC",
+    pais == 591 ~ "PAN",
+    pais == 600 ~ "PRY",
+    pais == 604 ~ "PER",
+    pais == 858 ~ "URY",
+    pais == 862 ~ "VEN"
   ))
 ```
 
