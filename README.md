@@ -39,6 +39,7 @@ CSA-Trabajo1/
  |  |  |- proc/
  |  |  |  |- datos_lb_proc.rds
  |  |- images/
+ |  |  |- figura1_original.png
  |  |- original-code/
  |- libs/
  |  |- ocs.scss
