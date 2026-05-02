@@ -214,9 +214,6 @@ div.csl-indent {
 <li>Imagen de tabla(s), figura(s) o resultado específico del artículo seleccionado, junto a una breve descripción.</li>
 </ul></section><section id="proceso-de-reproducción" class="level2" data-number="3.2"><h2 data-number="3.2" class="anchored" data-anchor-id="proceso-de-reproducción">
 <span class="header-section-number">3.2</span> Proceso de reproducción</h2>
-<ul>
-<li>Descripción detallada del proceso seguido para reproducir el resultado seleccionado, incluyendo los pasos realizados, las herramientas utilizadas, y cualquier ajuste necesario para lograr la reproducción. Incluye las siguientes sub secciones:</li>
-</ul>
 <section id="procesamiento" class="level3" data-number="3.2.1"><h3 data-number="3.2.1" class="anchored" data-anchor-id="procesamiento">
 <span class="header-section-number">3.2.1</span> Procesamiento</h3>
 <p><strong>Paso 1: Preparación del entorno y carga de paquetes</strong></p>
@@ -487,7 +484,8 @@ div.csl-indent {
 <span><span class="va">datos_lb_proc</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/na.fail.html">na.omit</a></span><span class="op">(</span><span class="va">datos_lb</span><span class="op">)</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<p><strong>PASO 6:</strong> Se etiquetan las variables para que sean categóricas. Para la variable confianza en sindicatos, se asignan las etiquetas “Mucha o algo de confianza” al valor 1 y “Poca o nada de confianza” al valor 0. Para la variable clase social, se asignan etiquetas descriptivas a cada una de las seis categorías. Para la variable posición política, se asignan etiquetas a cada una de las cuatro categorías. Para la variable sexo, se asignan las etiquetas “Hombre” y “Mujer” a los valores 0 y 1 respectivamente. Por último, para la variable país, se asignan códigos de texto de tres letras a cada uno de los códigos numéricos originales. Se realizó este paso al final para no tener problemas cuando se unieron ambas bases de datos en el paso 5.</p>
+<p><strong>PASO 6: Etiquetar variables </strong> En este paso, se etiquetan las variables para que sean categóricas. Esto se realizó al final para no tener problemas cuando se unieron ambas bases de datos en el paso 5.</p>
+<p>Para la variable confianza en sindicatos, se asignan las etiquetas “Mucha o algo de confianza” al valor 1 y “Poca o nada de confianza” al valor 0.</p>
 <div class="cell">
 <details class="code-fold"><summary>Show the code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">#--- 6. Etiquetar variables ----</span></span>
 <span><span class="va">datos_lb_proc</span><span class="op">$</span><span class="va">conf_sindicato_dic</span> <span class="op">&lt;-</span> <span class="fu">set_labels</span><span class="op">(</span><span class="va">datos_lb_proc</span><span class="op">$</span><span class="va">conf_sindicato_dic</span>,labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Mucha o algo de confianza"</span> <span class="op">=</span> <span class="fl">1</span>,</span>
@@ -495,28 +493,76 @@ div.csl-indent {
 <span>                                           <span class="op">)</span><span class="op">)</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<p>datos_lb_proc &lt;- datos_lb_proc %&gt;% mutate(clase_social = case_when( clase_social == 1 ~ “1. Gran empleador”, clase_social == 2 ~ “2. Pequeño empleador”, clase_social == 3 ~ “3. Pequeño burgués formal”, clase_social == 4 ~ “4. Clase media”, clase_social == 5 ~ “5. Obrero”, clase_social == 6 ~ “6. Autoempleado informal”))</p>
-<p>datos_lb_proc &lt;- datos_lb_proc %&gt;% mutate(posicion_pol_ord = case_when( posicion_pol_ord == 1 ~ “Izquierda”, posicion_pol_ord == 2 ~ “Centro”, posicion_pol_ord == 3 ~ “Derecha”, posicion_pol_ord == 4 ~ “Ninguno”))</p>
-<p>datos_lb_proc &lt;- datos_lb_proc %&gt;% mutate(sexo = case_when( sexo == 0 ~ “Hombre”, sexo == 1 ~ “Mujer”))</p>
-<p>datos_lb_proc &lt;- datos_lb_proc %&gt;% mutate(pais = case_when( pais == 32 ~ “ARG”, pais == 68 ~ “BOL”, pais == 76 ~ “BRA”, pais == 152 ~ “CHL”, pais == 170 ~ “COL”, pais == 188 ~ “CRI”, pais == 214 ~ “DOM”, pais == 218 ~ “ECU”, pais == 222 ~ “SLV”, pais == 320 ~ “GTM”, pais == 340 ~ “HND”, pais == 484 ~ “MEX”, pais == 558 ~ “NIC”, pais == 591 ~ “PAN”, pais == 600 ~ “PRY”, pais == 604 ~ “PER”, pais == 858 ~ “URY”, pais == 862 ~ “VEN” ))</p>
-<pre><code>
-**PASO 7: Guardar base de datos procesada**
-
-::: {.cell}
-
-```{.r .cell-code}
-datos_lb_proc &lt;- select(datos_lb_proc, 
-                conf_sindicato_dic,
-                clase_social,
-                posicion_pol_ord,
-                conf_instituciones,
-                sexo, 
-                edad, 
-                pais, 
-                ano)
-
-saveRDS(datos_lb_proc, file = "input/proc/datos_lb_proc.rds")</code></pre>
-<p>:::</p>
+<p>Para la variable clase social, se asignan etiquetas descriptivas a cada una de las seis categorías.</p>
+<div class="cell">
+<details class="code-fold"><summary>Show the code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">datos_lb_proc</span> <span class="op">&lt;-</span> <span class="va">datos_lb_proc</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">mutate</span><span class="op">(</span>clase_social <span class="op">=</span> <span class="fu">case_when</span><span class="op">(</span></span>
+<span>    <span class="va">clase_social</span> <span class="op">==</span> <span class="fl">1</span>  <span class="op">~</span> <span class="st">"1. Gran empleador"</span>, </span>
+<span>    <span class="va">clase_social</span> <span class="op">==</span> <span class="fl">2</span>  <span class="op">~</span> <span class="st">"2. Pequeño empleador"</span>,</span>
+<span>    <span class="va">clase_social</span> <span class="op">==</span> <span class="fl">3</span>  <span class="op">~</span> <span class="st">"3. Pequeño burgués formal"</span>,</span>
+<span>    <span class="va">clase_social</span> <span class="op">==</span> <span class="fl">4</span>  <span class="op">~</span> <span class="st">"4. Clase media"</span>,</span>
+<span>    <span class="va">clase_social</span> <span class="op">==</span> <span class="fl">5</span>  <span class="op">~</span> <span class="st">"5. Obrero"</span>,</span>
+<span>    <span class="va">clase_social</span> <span class="op">==</span> <span class="fl">6</span>  <span class="op">~</span> <span class="st">"6. Autoempleado informal"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p>Para la variable posición política, se asignan etiquetas a cada una de las cuatro categorías.</p>
+<div class="cell">
+<details class="code-fold"><summary>Show the code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">datos_lb_proc</span> <span class="op">&lt;-</span> <span class="va">datos_lb_proc</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">mutate</span><span class="op">(</span>posicion_pol_ord <span class="op">=</span> <span class="fu">case_when</span><span class="op">(</span></span>
+<span>    <span class="va">posicion_pol_ord</span> <span class="op">==</span> <span class="fl">1</span>  <span class="op">~</span> <span class="st">"Izquierda"</span>, </span>
+<span>    <span class="va">posicion_pol_ord</span> <span class="op">==</span> <span class="fl">2</span>  <span class="op">~</span> <span class="st">"Centro"</span>,</span>
+<span>    <span class="va">posicion_pol_ord</span> <span class="op">==</span> <span class="fl">3</span>  <span class="op">~</span> <span class="st">"Derecha"</span>,</span>
+<span>    <span class="va">posicion_pol_ord</span> <span class="op">==</span> <span class="fl">4</span>  <span class="op">~</span> <span class="st">"Ninguno"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p>Para la variable sexo, se asignan las etiquetas “Hombre” y “Mujer” a los valores 0 y 1 respectivamente.</p>
+<div class="cell">
+<details class="code-fold"><summary>Show the code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">datos_lb_proc</span> <span class="op">&lt;-</span> <span class="va">datos_lb_proc</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">mutate</span><span class="op">(</span>sexo <span class="op">=</span> <span class="fu">case_when</span><span class="op">(</span></span>
+<span>    <span class="va">sexo</span> <span class="op">==</span> <span class="fl">0</span>  <span class="op">~</span> <span class="st">"Hombre"</span>, </span>
+<span>    <span class="va">sexo</span> <span class="op">==</span> <span class="fl">1</span>  <span class="op">~</span> <span class="st">"Mujer"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p>Por último, para la variable país, se asignan códigos de texto de tres letras a cada uno de los códigos numéricos originales.</p>
+<div class="cell">
+<details class="code-fold"><summary>Show the code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">datos_lb_proc</span> <span class="op">&lt;-</span> <span class="va">datos_lb_proc</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">mutate</span><span class="op">(</span>pais <span class="op">=</span> <span class="fu">case_when</span><span class="op">(</span></span>
+<span>    <span class="va">pais</span> <span class="op">==</span> <span class="fl">32</span>  <span class="op">~</span> <span class="st">"ARG"</span>,</span>
+<span>    <span class="va">pais</span> <span class="op">==</span> <span class="fl">68</span>  <span class="op">~</span> <span class="st">"BOL"</span>,</span>
+<span>    <span class="va">pais</span> <span class="op">==</span> <span class="fl">76</span>  <span class="op">~</span> <span class="st">"BRA"</span>,</span>
+<span>    <span class="va">pais</span> <span class="op">==</span> <span class="fl">152</span> <span class="op">~</span> <span class="st">"CHL"</span>,</span>
+<span>    <span class="va">pais</span> <span class="op">==</span> <span class="fl">170</span> <span class="op">~</span> <span class="st">"COL"</span>,</span>
+<span>    <span class="va">pais</span> <span class="op">==</span> <span class="fl">188</span> <span class="op">~</span> <span class="st">"CRI"</span>,</span>
+<span>    <span class="va">pais</span> <span class="op">==</span> <span class="fl">214</span> <span class="op">~</span> <span class="st">"DOM"</span>,</span>
+<span>    <span class="va">pais</span> <span class="op">==</span> <span class="fl">218</span> <span class="op">~</span> <span class="st">"ECU"</span>,</span>
+<span>    <span class="va">pais</span> <span class="op">==</span> <span class="fl">222</span> <span class="op">~</span> <span class="st">"SLV"</span>,</span>
+<span>    <span class="va">pais</span> <span class="op">==</span> <span class="fl">320</span> <span class="op">~</span> <span class="st">"GTM"</span>,</span>
+<span>    <span class="va">pais</span> <span class="op">==</span> <span class="fl">340</span> <span class="op">~</span> <span class="st">"HND"</span>,</span>
+<span>    <span class="va">pais</span> <span class="op">==</span> <span class="fl">484</span> <span class="op">~</span> <span class="st">"MEX"</span>,</span>
+<span>    <span class="va">pais</span> <span class="op">==</span> <span class="fl">558</span> <span class="op">~</span> <span class="st">"NIC"</span>,</span>
+<span>    <span class="va">pais</span> <span class="op">==</span> <span class="fl">591</span> <span class="op">~</span> <span class="st">"PAN"</span>,</span>
+<span>    <span class="va">pais</span> <span class="op">==</span> <span class="fl">600</span> <span class="op">~</span> <span class="st">"PRY"</span>,</span>
+<span>    <span class="va">pais</span> <span class="op">==</span> <span class="fl">604</span> <span class="op">~</span> <span class="st">"PER"</span>,</span>
+<span>    <span class="va">pais</span> <span class="op">==</span> <span class="fl">858</span> <span class="op">~</span> <span class="st">"URY"</span>,</span>
+<span>    <span class="va">pais</span> <span class="op">==</span> <span class="fl">862</span> <span class="op">~</span> <span class="st">"VEN"</span></span>
+<span>  <span class="op">)</span><span class="op">)</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p><strong>PASO 7: Guardar base de datos procesada</strong> Se guarda la base de datos procesada que incluye la combinación de las variables de la base de datos de Latinobarómetro de los años 2018 y 2020.</p>
+<div class="cell">
+<details class="code-fold"><summary>Show the code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">datos_lb_proc</span> <span class="op">&lt;-</span> <span class="fu">select</span><span class="op">(</span><span class="va">datos_lb_proc</span>, </span>
+<span>                <span class="va">conf_sindicato_dic</span>,</span>
+<span>                <span class="va">clase_social</span>,</span>
+<span>                <span class="va">posicion_pol_ord</span>,</span>
+<span>                <span class="va">conf_instituciones</span>,</span>
+<span>                <span class="va">sexo</span>, </span>
+<span>                <span class="va">edad</span>, </span>
+<span>                <span class="va">pais</span>, </span>
+<span>                <span class="va">ano</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">saveRDS</a></span><span class="op">(</span><span class="va">datos_lb_proc</span>, file <span class="op">=</span> <span class="st">"input/proc/datos_lb_proc.rds"</span><span class="op">)</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
 </section><section id="reproducción" class="level3" data-number="3.2.2"><h3 data-number="3.2.2" class="anchored" data-anchor-id="reproducción">
 <span class="header-section-number">3.2.2</span> Reproducción</h3>
 <div class="cell" data-layout-align="center">

@@ -197,8 +197,6 @@ datos_2018 <- datos_2018 %>%
   ))
 ```
 
-Para los países, se convierten los códigos numéricos en códigos de texto de tres letras.
-
 
 **PASO 4: Limpieza de variables latinobarómetro 2020**
 
@@ -241,7 +239,7 @@ datos_2020 <- rename(datos_2020,
 
 ```
 
-
+Las variables confianza en sindicatos y clase social se construyen de la misma manera que en el paso 3.
 ```{r}
 #| echo: true
 #| eval: false
@@ -315,7 +313,7 @@ datos_2020 <- datos_2020 %>%
 
 ```
 
-
+Las variables sexo y edad también se construyen de la misma manera que en el paso 3.
 ```{r}
 #| echo: true
 #| eval: false
@@ -343,7 +341,7 @@ datos_2020 <- datos_2020 %>%
 
 ```
 
-**PASO 5: unir las bases de datos**
+**PASO 5: Unir las bases de datos**
 
 Primero, se le agrega a cada base de datos una columna nueva correspondiente al año para poder identificarlas al momento de unirlas. Luego, si juntan las bases de datos. Por último, se elimina cualquier dato que esté como NA.
 
@@ -360,7 +358,8 @@ datos_lb_proc <- na.omit(datos_lb)
 
 ```
 
-**PASO 6: Etiquetar variables **
+**PASO 6: Etiquetar variables**
+
 En este paso, se etiquetan las variables para que sean categóricas. Esto se realizó al final para no tener problemas cuando se unieron ambas bases de datos en el paso 5.
 
  Para la variable confianza en sindicatos, se asignan las etiquetas "Mucha o algo de confianza" al valor 1 y "Poca o nada de confianza" al valor 0.
@@ -439,6 +438,7 @@ datos_lb_proc <- datos_lb_proc %>%
 ```
 
 **PASO 7: Guardar base de datos procesada**
+
 Se guarda la base de datos procesada que incluye la combinación de las variables de la base de datos de Latinobarómetro de los años 2018 y 2020.
 ```{r}
 #| echo: true

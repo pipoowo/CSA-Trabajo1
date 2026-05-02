@@ -1,7 +1,5 @@
 # Evaluación de reproducibilidad
 
-Análisis detallado del artículo seleccionado, evaluando los siguientes aspectos:
-
   -   **Disponibilidad de datos y códigos**: El artículo proporciona acceso a los datos y códigos utilizados en el estudio. Ambos se encuentran disponibles de forma abierta en la página oficial de publicación del artículo correspondiente a [Cambridge University Press](https://doi.org/10.1017/lar.2024.64). Para acceder a esta se debe entrar a Supplementary materials, donde se debe descargar el archivo Word adjunto. Tras descargarlo, en el documento se encuentra un enlace que dirige a un [repositorio de libre acceso](https://osf.io/tdh89/overview?view_only=be70c0c83be948b6bbcc8e8b5a899d91) en el cual se encuentran los archivos mencionados. También, dentro del artículo los autores detallan el repositorio y proporcionan el link directo.
 
   -   **Documentación**: El artículo incluye una descripción clara de los métodos y procedimientos utilizados en el estudio. Los autores especifican la fuente de información (Encuesta Latinobarómetro 2018-2020), detallan la muestra, la construcción de las variables y las decisiones metodológicas. Por lo que es suficiente replicar el estudio.
