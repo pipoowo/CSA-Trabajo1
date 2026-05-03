@@ -8,9 +8,9 @@ pacman::p_load(lme4,reghelper,haven,stargazer,ggplot2,dplyr, patchwork,
 
 #---- 2. Cargar bases de datos ----
 
-datos_lb_proc<- readRDS(file = "input/datos_lb_proc.rds")
+datos_lb_proc<- readRDS(file = "input/data/proc/datos_lb_proc.rds")
 
-Latinobarometro18_20_LARR<- readRDS(file = "input/Latinobarometro18_20_LARR.rds")
+Latinobarometro18_20_LARR<- readRDS(file = "input/data/original/Latinobarometro18_20_LARR.rds")
 
 Latinobarometro18_20_LARR <- as.data.frame(Latinobarometro18_20_LARR)  
 
@@ -22,7 +22,7 @@ datos_lb_proc <- datos_lb_proc %>%
     pais = relevel(as.factor(pais), ref = "ARG"),
     ano = relevel(as.factor(ano), ref = "2018"))
 
-#---- 3. Figura 1: Interaccion clase /año (a y b)----
+#---- 3. Figura 3: Interaccion clase /año (a y b)----
 
 log1a <- glm(conf_sindicato_dic ~ clase_social + sexo + edad + pais + ano +
               conf_instituciones + posicion_pol_ord + clase_social*ano,
@@ -92,7 +92,7 @@ Int_Clase_Ano_Junto <- ggplot(predtot1, aes(x = x,
         axis.text.x = element_text(angle = 45, hjust = 1),
         legend.position = "bottom")
 
-#---- 4. Figura 1: Interaccion pol position /año (c y d) ----
+#---- 4. Figura 3: Interaccion pol position /año (c y d) ----
 log2a <- glm(conf_sindicato_dic ~ clase_social + sexo + edad + pais + ano +
               conf_instituciones + posicion_pol_ord + posicion_pol_ord*ano,
             data = datos_lb_proc,
@@ -161,14 +161,14 @@ Int_PolPos_Ano_Junto <- ggplot(predtot2, aes(x = x,
         axis.text.x = element_text(angle = 45, hjust = 1),
         legend.position = "bottom")
 
-figura1 <- (Int_Clase_Ano + Int_Clase_Ano_Junto) / (Int_PolPos_Ano + Int_PolPos_Ano_Junto)
+figura3 <- (Int_Clase_Ano + Int_Clase_Ano_Junto) / (Int_PolPos_Ano + Int_PolPos_Ano_Junto)
 
-ggsave(figura1, filename = "figura1.png",
+ggsave(figura3, filename = "output/graphs/figura3.png",
        device = "png",dpi = "retina", units = "cm",
        width = 36,height = 24)
 
 
-#---- 5. Figura 2: Interaccion pais*año (ordenado de menor a mayor confianza) ----
+#---- 5. Figura 4: Interaccion pais*año (ordenado de menor a mayor confianza) ----
 log3a<- glm(conf_sindicato_dic ~ clase_social+sexo+edad+pais+ano+
              conf_instituciones+posicion_pol_ord+pais*ano,
            data = datos_lb_proc,
@@ -242,8 +242,8 @@ Int_Pais_Ano_Junto <- ggplot(predtot3, aes(x = x,
   
 #---- 6. Guardar figuras ----
 
-figura2<- Int_Pais_Ano / Int_Pais_Ano_Junto 
+figura4<- Int_Pais_Ano / Int_Pais_Ano_Junto 
 
-ggsave(figura2, filename = "figura2.png",
+ggsave(figura4, filename = "output/graphs/figura4.png",
        device = "png",dpi = "retina", units = "cm",
        width = 30,height = 24)
