@@ -31,6 +31,7 @@ CSA-Trabajo1/
  |- index.qmd
  |- input/
  |  |- bib/
+ |  |  |- apa7.csl
  |  |- data/
  |  |  |- original/
  |  |  |  |- Latinobarometro18_20_LARR.rds
