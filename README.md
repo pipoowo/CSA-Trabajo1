@@ -43,17 +43,18 @@ CSA-Trabajo1/
  |  |  |- figura1_original.png
  |  |  |- figura2_original.png
  |  |- original-code/
+ |  |  |- 2.Analysis_InLevel.R
  |- libs/
  |  |- ocs.scss
  |- output/
  |  |- graphs/
+ |  |  |- figura3.png
+ |  |  |- figura4.png
  |  |- tables/
  |- processing/
  |  |- README-prod.md
- |  |- prod_analysis.Rmd
- |  |- prod_analysis.html
- |  |- prod_prep.Rmd
- |  |- prod_prep.html
+ |  |- prod_analysis.R
+ |  |- prod_prep.r
  |- scripts/
  |  |- update-working-tree.sh
 ```
