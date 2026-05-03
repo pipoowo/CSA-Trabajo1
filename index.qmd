@@ -1,6 +1,6 @@
 ---
-title: "Reporte de Reproducibilidad: Política de clases y confianza en los sindicatos en América Latina"
-subtitle: "Artículo: [Peréz-Ahumada, P. & Carrasco, K. (2025). Política de clases y confianza en los sindicatos en América Latina]
+title: "Reporte de Reproducibilidad"
+subtitle: "Artículo: Política de clases y confianza en los sindicatos en América Latina (Pérez-Ahumada y Carrasco, 2025).
  <br><a href='https://github.com/pipoowo/CSA-Trabajo1' target='_blank' ><i class='bi bi-github'></i></a>" # reemplazar con dirección al repositorio del proyecto
 author:
   - name: Elisa Calderón
