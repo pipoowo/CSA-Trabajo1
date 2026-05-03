@@ -1,6 +1,6 @@
 # Análisis reproducible
 
-Con motivos de evaluar qué tan reproducible es este artículo y sus resultados en este reporte, se seleccionaron tres gráficos para replicar.
+Con motivos de evaluar qué tan reproducible es este artículo, se seleccionaron tres gráficos para replicar.
 
 ## Resultado a reproducir
 
