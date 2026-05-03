@@ -2,7 +2,7 @@
 
 ## Código
 
-Se presenta el código original de análisis utilizado por @perez-ahumada_politica_2025.
+Se presenta aquí el código original de análisis utilizado por @perez-ahumada_politica_2025.
 
 ```{r}
 #| echo: true
