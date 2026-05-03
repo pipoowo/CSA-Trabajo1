@@ -4,7 +4,7 @@
 
 **Paso 1: Preparación del entorno y carga de paquetes**
 
-En primer lugar, se cargan las librerías necesarias con pacman. Luego se desactiva la notación científica para facilitar la lectura de los datos. Por último, se limpia el entorno de trabajo, borrando cualquier objeto o dato que estuviera previamente cargado.
+En primer lugar, se cargan las librerías necesarias con _pacman_. Luego, se desactiva la notación científica para facilitar la lectura de los datos. Por último, se limpia el entorno de trabajo, borrando cualquier objeto o dato que estuviera previamente cargado.
 
 
 ```{r}
@@ -28,7 +28,7 @@ rm(list = ls())
 
 **Paso 2: Importar base de datos**
 
-Se importan las dos bases de datos a utilizar. La función readRDS carga los datos del año 2018 y los asigna al objeto lb_2018, y load carga los datos del año 2020 que están en formato .rdata y lo denomina lb_2020.
+Se importan las dos bases de datos a utilizar. La función _readRDS_ carga los datos del año 2018 y los asigna al objeto "lb_2018", y _load_ carga los datos del año 2020 que están en formato .rdata y lo denomina "lb_2020".
 
 ```{r}
 #| echo: true
@@ -69,7 +69,7 @@ datos_2018 <- select(lb_2018,
 
 ```
 
-Luego para facilitar la lectura y el manejo de las variables, se renombran a palabras claves que representen mejor definición.
+Luego, para facilitar la lectura y el manejo de las variables, se renombran a palabras claves que representen una mejor definición.
 
 ```{r}
 #| echo: true
@@ -93,7 +93,7 @@ datos_2018 <- rename(datos_2018,
 
 ```
 
-Para la variable confianza en sindicatos, se recodifica a una variable dicotómica. Si la respuesta original era 1 o 2 (mucha o algo de confianza), se le asigna el valor 1. Por el contrario, si el valor era 3 o 4 (poco o nada de confianza), se le asigna el valor 0. También se le asigna NA a los valores pérdidos.
+Para la variable **confianza en sindicatos**, se recodifica a una variable dicotómica. Si la respuesta original era 1 o 2 (mucha o algo de confianza), se le asigna el valor 1. Por el contrario, si el valor era 3 o 4 (poco o nada de confianza), se le asigna el valor 0. También se le asigna NA a los valores perdidos.
 
 ```{r}
 #| echo: true
@@ -109,19 +109,19 @@ datos_2018 <- datos_2018 %>%
 
 ```
 
-Para la variable clase social se crearon seis categorías basado en el esquema de Erik O. Wright.
+Para la variable **clase social** se crearon seis categorías basado en el esquema de Erik O. Wright.
 
-- La primera categoría corresponde a grandes empleadores y se construye identificando quienes son independientes (valor 1 de la variable situación ocupacional), dueños de empresa (valor 2 de la variable tipo de trabajo), y que además declaran recibir un ingreso subjetivo con el cual "les alcanza bien" y "pueden ahorrar" (valor 1 de la variable ingreso subjetivo). 
+- La primera categoría corresponde a **grandes empleadores** y se construye identificando quienes son independientes (valor 1 de la variable situación ocupacional), dueños de empresa (valor 2 de la variable tipo de trabajo), y que además declaran recibir un ingreso subjetivo con el cual "les alcanza bien" y "pueden ahorrar" (valor 1 de la variable ingreso subjetivo). 
 
-- La segunda categoría es pequeños empleadores definidos por trabajadores independientes, dueños de empresa y cuyos ingresos percibidos no les alcanza bien ni les permite ahorrar (valores 2,3,4 de ingreso subjetivo).
+- La segunda categoría es **pequeños empleadores**, definidos por trabajadores independientes, dueños de empresa y cuyos ingresos percibidos no les alcanza bien ni les permite ahorrar (valores 2,3,4 de ingreso subjetivo).
 
-- La tercera categoría es la pequeña burguesía y agrupa a los independientes con ocupaciones de autoempleo (1, 3 y 4 de la variable tipo de trabajo) que cuentan con educación profesional (valor 3 de la variable nivel educativo).
+- La tercera categoría es la **pequeña burguesía** y agrupa a los independientes con ocupaciones de autoempleo (1, 3 y 4 de la variable tipo de trabajo) que cuentan con educación profesional (valor 3 de la variable nivel educativo).
 
-- La cuarta categoría corresponde a clase media, que une a los asalariados (valores 2 y 3 de situación ocupacional) en puestos técnicos o de gestión (valores 5, 6, 7 y 8 de la variable tipo de trabajo) y que también poseen formación profesional (valores 3 de nivel educativo).
+- La cuarta categoría corresponde a **clase media**, que une a los asalariados (valores 2 y 3 de situación ocupacional) en puestos técnicos o de gestión (valores 5, 6, 7 y 8 de la variable tipo de trabajo) y que también poseen formación profesional (valores 3 de nivel educativo).
 
-- La quinta categoría es la clase trabajadora que se define como el grupo de asalariados con puestos técnicos o de gestión pero que no cuentan con educación superior completa (valores 1 y 2 de la variable nivel educativo). 
+- La quinta categoría es la **clase trabajadora**, que se define como el grupo de asalariados con puestos técnicos o de gestión pero que no cuentan con educación superior completa (valores 1 y 2 de la variable nivel educativo). 
 
-- La sexta categoría corresponde a autoempleados informales compuesta por trabajadores independientes en ocupaciones de autoempleo que poseen niveles educativos bajos o medios (valores 1 y 2). Cualquier combinación de datos que no coincida con estos criterios se clasifica como NA.
+- La sexta categoría corresponde a **autoempleados** informales, compuesta por trabajadores independientes en ocupaciones de autoempleo que poseen niveles educativos bajos o medios (valores 1 y 2). Cualquier combinación de datos que no coincida con estos criterios se clasifica como NA.
 
 ```{r}
 #| echo: true
@@ -141,7 +141,7 @@ datos_2018 <- datos_2018 %>%
 
 ```
 
-La variable posición política agrupa una escala de 0 a 10 en tres bloques: los valores 0, 1, 2, 3 originales, se les asigna la categoría 1 izquierda. Los valores 4, 5 y 6 la categoría 2 centro. Los valores 7, 8 ,9 y 10 la categoría 3 derecha. Por último, se clasifica en la categoría 4 los valores negativos -1, -4, -6 que corresponden a sin identificación.
+La variable **posición política** agrupa una escala de 0 a 10 en tres bloques: los valores 0, 1, 2, 3 originales, se les asigna la categoría 1 izquierda. Los valores 4, 5 y 6 la categoría 2 centro. Los valores 7, 8 ,9 y 10 la categoría 3 derecha. Por último, se clasifica en la categoría 4 los valores negativos -1, -4, -6 que corresponden a sin identificación.
 
 ```{r}
 #| echo: true
@@ -159,7 +159,7 @@ datos_2018 <- datos_2018 %>%
 
 ```
 
-Para crear la variable confianza en instituciones políticas, primero se convierten los valores inválidos -1 de las variables confianza en el congreso, en el gobierno y en partidos en NA. Luego, se invierte la escala restando el valor a 4, de manera que, a mayor número hay mayor confianza en las instituciones. Por último, se crea el índice conf_instituciones.
+Para crear la variable **confianza en instituciones políticas**, primero se convierten los valores inválidos -1 de las variables confianza en el congreso, en el gobierno y en partidos en NA. Luego, se invierte la escala restando el valor a 4, de manera que, a mayor número hay mayor confianza en las instituciones. Por último, se crea el índice "conf_instituciones".
 
 ```{r}
 #| echo: true
@@ -184,7 +184,7 @@ datos_2018 <- mutate(datos_2018,
 
 ```
 
-La variable sexo se convierte en una variable dummy, donde 1 es mujer y 0 hombre. Los valores -2 se asignan como NA.
+La variable **sexo** se convierte en una variable dummy, donde 1 es mujer y 0 hombre. Los valores -2 se asignan como NA.
 
 ```{r}
 #| echo: true
@@ -200,7 +200,7 @@ datos_2018 <- datos_2018 %>%
 
 ```
 
-La edad se mantiene como variable numérica, pero se asigna NA a los valores menores a 1.
+La **edad** se mantiene como variable numérica, pero se asigna NA a los valores menores a 1.
 ```{r}
 #| echo: true
 #| eval: false
@@ -254,7 +254,7 @@ datos_2020 <- rename(datos_2020,
 
 ```
 
-Las variables confianza en sindicatos y clase social se construyen de la misma manera que en el paso 3.
+Las variables **confianza en sindicatos** y **clase social** se construyen de la misma manera que en el paso 3.
 ```{r}
 #| echo: true
 #| eval: false
@@ -290,7 +290,7 @@ datos_2020 <- datos_2020 %>%
 
 ```
 
-La variable posición política se constrye igual que en el paso 3, pero la categoría 4 sin identificación contiene los valores 97, 98 y 99 de la base de datos.
+La variable **posición política** se construye igual que en el paso 3, pero la categoría 4 sin identificación contiene los valores 97, 98 y 99 de la base de datos.
 ```{r}
 #| echo: true
 #| eval: false
@@ -307,7 +307,7 @@ datos_2020 <- datos_2020 %>%
 
 ```
 
-Para la variable confianza en instituciones políticas, se realiza en primer lugar, la limpieza de las variables confianza en el congreso, confianza en el gobierno y confianza en los partidos, identificando los valores de respuesta no válidos (-1, -2, -3 y -4) y reemplazándolos por NA. Luego, el código invierte la escala de las tres variables restando su valor a 4 y, finalmente, suma los valores de estas variables ya transformadas para crear un índice llamado conf_instituciones.
+Para la variable **confianza en instituciones políticas** se realiza, en primer lugar, la limpieza de las variables confianza en el congreso, confianza en el gobierno y confianza en los partidos, identificando los valores de respuesta no válidos (-1, -2, -3 y -4) y reemplazándolos por NA. Luego, el código invierte la escala de las tres variables restando su valor a 4 y, finalmente, suma los valores de estas variables ya transformadas para crear un índice llamado "conf_instituciones".
 ```{r}
 #| echo: true
 #| eval: false
@@ -328,7 +328,7 @@ datos_2020 <- datos_2020 %>%
 
 ```
 
-Las variables sexo y edad también se construyen de la misma manera que en el paso 3.
+Las variables **sexo** y **edad** también se construyen de la misma manera que en el paso 3.
 ```{r}
 #| echo: true
 #| eval: false
@@ -377,7 +377,7 @@ datos_lb_proc <- na.omit(datos_lb)
 
 En este paso, se etiquetan las variables para que sean categóricas. Esto se realizó al final para no tener problemas cuando se unieron ambas bases de datos en el paso 5.
 
- Para la variable confianza en sindicatos, se asignan las etiquetas "Mucha o algo de confianza" al valor 1 y "Poca o nada de confianza" al valor 0.
+ Para la variable **confianza en sindicatos**, se asignan las etiquetas "Mucha o algo de confianza" al valor 1 y "Poca o nada de confianza" al valor 0.
 ```{r}
 #| echo: true
 #| eval: false
@@ -387,7 +387,7 @@ datos_lb_proc$conf_sindicato_dic <- set_labels(datos_lb_proc$conf_sindicato_dic,
                                            ))
 ```
 
-Para la variable clase social, se asignan etiquetas descriptivas a cada una de las seis categorías.
+Para la variable **clase social**, se asignan etiquetas descriptivas a cada una de las seis categorías.
 ```{r}
 #| echo: true
 #| eval: false
@@ -401,7 +401,7 @@ datos_lb_proc <- datos_lb_proc %>%
     clase_social == 6  ~ "6. Autoempleado informal"))
 ```
 
-Para la variable posición política, se asignan etiquetas a cada una de las cuatro categorías.
+Para la variable **posición política**, se asignan etiquetas a cada una de las cuatro categorías.
 ```{r}
 #| echo: true
 #| eval: false
@@ -413,7 +413,7 @@ datos_lb_proc <- datos_lb_proc %>%
     posicion_pol_ord == 4  ~ "Ninguno"))
 ```
 
- Para la variable sexo, se asignan las etiquetas "Hombre" y "Mujer" a los valores 0 y 1 respectivamente.
+ Para la variable **sexo**, se asignan las etiquetas "Hombre" y "Mujer" a los valores 0 y 1 respectivamente.
 
 ```{r}
 #| echo: true
@@ -424,7 +424,7 @@ datos_lb_proc <- datos_lb_proc %>%
     sexo == 1  ~ "Mujer"))
 ```
 
-Por último, para la variable país, se asignan códigos de texto de tres letras a cada uno de los códigos numéricos originales. 
+Por último, para la variable **país**, se asignan códigos de texto de tres letras a cada uno de los códigos numéricos originales. 
 
 ```{r}
 #| echo: true

@@ -1,6 +1,6 @@
 # Análisis reproducible
 
-Seleccionar un resultado específico del artículo (por ejemplo, una tabla de resultados o una figura) y tratar de reproducirlo utilizando los datos y el código proporcionados. Documentar el proceso de reproducción, incluyendo cualquier dificultad encontrada y cómo se resolvió.
+Con motivos de evaluar qué tan reproducible es este artículo, se seleccionaron tres gráficos para replicar.
 
 ## Resultado a reproducir
 
@@ -14,6 +14,6 @@ La primera imagen que se busca reproducir presenta dos gráficos de líneas (pan
 
 La segunda imagen corresponde a un gráfico de líneas que muestra la probabilidad de confiar en los sindicatos a través de 18 países de América Latina, comparando nuevamente los resultados del año 2018 (línea gris con círculos) y el 2020 (línea negra con triángulos). 
 
-Los principales hallazgos es que existe una gran diferencia en cómo se percibe a los sindicatos en la región. En el extremo inferior, países como Venezuela (VEN) muestran los niveles más bajos de confianza (alrededor del 10-15%). En el extremo opuesto, Chile (CHL) es el país con mayor probabilidad de confianza en los sindicatos, superando el 40% en ambos años. Además, se observa una caída generalizada de la confianza entre los años 2018 y 2020. En la mayoría de los países, la línea negra (2020) se ubica por debajo de la línea gris (2018).
+Entre los principales hallazgos está que existe una gran diferencia en cómo se percibe a los sindicatos en la región. En el extremo inferior, países como Venezuela (VEN) muestran los niveles más bajos de confianza (alrededor del 10-15%). En el extremo opuesto, Chile (CHL) es el país con mayor probabilidad de confianza en los sindicatos, superando el 40% en ambos años. Además, se observa una caída generalizada de la confianza entre los años 2018 y 2020. En la mayoría de los países, la línea negra (2020) se ubica por debajo de la línea gris (2018).
 
 ![](input/images/figura2_original.png)
