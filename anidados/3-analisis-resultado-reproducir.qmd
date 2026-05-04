@@ -10,10 +10,10 @@ La @fig-figura-1 corresponde a dos gráficos de líneas (paneles a y b) que ilus
 
 **Panel (b):** Se observa que la confianza en sindicatos aumenta a medida que la posición se mueve hacia la izquierda. Las personas sin posición política o de derecha muestran menores niveles de confianza (alrededor de 20–25%), mientras que quienes se identifican con la izquierda presentan los niveles más altos (cerca de 30%). Al igual que en el panel anterior, la confianza general en los sindicatos fue ligeramente menor en 2020 en comparación con 2018 para casi todos los grupos políticos.
 
-![](input/images/figura1_original.png){#fig-figura-1 fig-cap="Probabilidad de confiar en un sindicato por clase social y posición política, año 2018 y 2020 (Figura original)"}
+![Probabilidad de confiar en un sindicato por clase social y posición política, año 2018 y 2020 (Figura original)](input/images/figura1_original.png){#fig-figura-1}
 
 La @fig-figura-2 corresponde a un gráfico de líneas que muestra la probabilidad de confiar en los sindicatos a través de 18 países de América Latina, comparando nuevamente los resultados del año 2018 (línea gris con círculos) y el 2020 (línea negra con triángulos). 
 
 Entre los principales hallazgos está que existe una gran diferencia en cómo se percibe a los sindicatos en la región. En el extremo inferior, países como Venezuela (VEN) muestran los niveles más bajos de confianza (alrededor del 10-15%). En el extremo opuesto, Chile (CHL) es el país con mayor probabilidad de confianza en los sindicatos, superando el 40% en ambos años. Además, se observa una caída generalizada de la confianza entre los años 2018 y 2020. En la mayoría de los países, la línea negra (2020) se ubica por debajo de la línea gris (2018).
 
-![](input/images/figura2_original.png){#fig-figura-2 fig-cap="Probabilidad de confiar en un sindicato por país, año 2018 y 2020 (Figura original)"}
+![Probabilidad de confiar en un sindicato por país, año 2018 y 2020 (Figura original)](input/images/figura2_original.png){#fig-figura-2}
