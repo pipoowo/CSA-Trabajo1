@@ -42,7 +42,7 @@ log1b <- glm(trustunions_life_dummy ~ class3+female+edad+pais+ano+
              family = "binomial")
 ```
 
-A continuación, en la @fig-figura-3 se presentan los resultados de la reproducción y comparación para la interacción entre clase social y año, y posición política y año, a partir de los modelos logísticos ejecutados. En los paneles (a) y (c) se muestra la reproducción utilizando la base de datos procesada, mientras que en los (b) y (d) se comparan los resultados obtenidos con la base reproducida y la base original proporcionada por los autores.
+A continuación, en la @fig-figura-3 se presentan los resultados de la reproducción y comparación para la interacción entre clase social y año, y posición política y año, a partir de los modelos logísticos ejecutados. En los paneles (a) y (c) se muestra la reproducción utilizando la base de datos procesada, mientras que en los (b) y (d) se comparan los resultados obtenidos con la base reproducida y la base original proporcionada por los autores. Tanto los gráficos reproducidos como los originales obtuvieron resultados similares en cuanto a las tendencias generales, sin embargo, se observaron diferencias significativas en los niveles de confianza predichos entre ambos años, como también de algunos grupos. 
 
 ```{r figura-3}
 #| echo: false
@@ -245,7 +245,7 @@ log3b<- glm(trustunions_life_dummy ~ class3+female+edad+pais+ano+
            family = "binomial")
 ```
 
-Luego, se generaron gráficos de predicciones ajustadas para cada país y año, y se compararon los resultados entre ambas bases de datos. En la @fig-figura-4 se presentan los resultados de la reproducción y comparación para la interacción entre país y año, donde el panel (a) muestra la reproducción utilizando la base de datos procesada, mientras que en el panel (b) compara los resultados obtenidos con la base reproducida y la base original proporcionada por los autores. En ambos gráficos, los países están ordenados de menor a mayor confianza en sindicatos para facilitar la comparación visual entre ambos años.
+Luego, se generaron gráficos de predicciones ajustadas para cada país y año, y se compararon los resultados entre ambas bases de datos. En la @fig-figura-4 se presentan los resultados de la reproducción y comparación para la interacción entre país y año, donde el panel (a) muestra la reproducción utilizando la base de datos procesada, mientras que en el panel (b) compara los resultados obtenidos con la base reproducida y la base original proporcionada por los autores. Se puede observar que las figuras reproducida y original muestran tendencias casi idénticas con respecto a la confianza en los sindicatos por país y año, sin embargo, se aprecian leves diferencias en los niveles de confianza en sindicatos predichos. 
 ```{r figura-4}
 #| echo: false
 #| warning: false
