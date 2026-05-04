@@ -1,0 +1,272 @@
+pacman::p_load(dplyr,       # Manipulacion de datos 
+               haven,       # importar datos en .dta o .sav
+               car,         # recodificar variables
+               sjlabelled,  # etiquetado de variables
+               sjmisc,      # descriptivos y frecuencias
+               sjPlot,      # tablas, plots y descriptivos
+               summarytools, # resumen de dataframe
+               readxl        # base de datos xlsx
+               )
+
+options(scipen = 999)
+rm(list = ls())
+
+lb_2018 <- readRDS("input/Latinobarometro_2018_Esp_R_v20190303.rds")
+load("input/Latinobarometro_2020_Esp_Rdata_v1_0.rdata")
+lb_2020 <- Latinobarometro_2020_Esp
+
+Latinobarometro18_20_LARR<- readRDS(file = "input/Latinobarometro18_20_LARR.rds")
+Latinobarometro18_20_LARR <- as.data.frame(Latinobarometro18_20_LARR)
+
+#---- 3. Limpieza de variables: latinobarómetro 2018 ----
+##---- 3.1. Seleccionar variables ----
+datos_2018 <- select(lb_2018, 
+                P16NC.C, #Conf. en sindicatos
+                S14A, S14B, S15, REEDUC.1, S4, #Clase social: sit. ocupacional; tipo de trabajo; nivel educacional; ingreso subjetivo
+                P22ST, #Posici+on política
+                P15STGBSC.D, P15STGBSC.E, P15STGBSC.G, #Conf en: congreso, gob. y partidos políticos
+                SEXO,
+                EDAD,
+                IDENPA)
+
+##---- 3.2. Renombrar variables ----
+datos_2018 <- rename(datos_2018, 
+                conf_sindicato = P16NC.C, 
+                situacion_ocupacional = S14A,
+                tipo_trabajo_a = S15,
+                tipo_trabajo_b = S14B,
+                nivel_educ = REEDUC.1, 
+                ing_subj = S4, 
+                posicion_pol = P22ST, 
+                conf_congreso = P15STGBSC.D,
+                conf_gob = P15STGBSC.E, 
+                conf_partido = P15STGBSC.G, 
+                sexo = SEXO,
+                edad = EDAD,
+                pais = IDENPA)
+
+##--- 3.3 Confianza en sindicatos ----
+datos_2018 <- datos_2018 %>% 
+  mutate(conf_sindicato_dic = case_when(
+    conf_sindicato %in% c(1, 2) ~ 1, #mucha o algo de confianza
+    conf_sindicato %in% c(3, 4) ~ 0, #poca o nada de confianza
+    TRUE ~ NA
+  ))
+
+##--- 3.4 Clase social ----
+
+datos_2018 <- datos_2018 %>% 
+  mutate(clase_social = case_when(
+    situacion_ocupacional %in% c(1, 4, 5) & (tipo_trabajo_a == 2 | tipo_trabajo_b == 2) & ing_subj == 1 ~ 1, #grandes empleadores: independiente + dueño de empresa + ingreso
+    situacion_ocupacional %in% c(1, 4, 5) & (tipo_trabajo_a == 2 | tipo_trabajo_b == 2) & ing_subj %in% c(2, 3, 4) ~ 2, #pequeños empleadores: independiente + dueño de empresa + ingreso
+    situacion_ocupacional %in% c(1, 4, 5) & (tipo_trabajo_a %in% c(1, 3, 4) | tipo_trabajo_b %in% c(1, 3, 4)) & nivel_educ == 3 ~ 3, #pequeña burguesía: autoempleado + profesional
+    situacion_ocupacional %in% c(2, 3, 4, 5) & (tipo_trabajo_a %in% c(5, 6, 7, 8) | tipo_trabajo_b %in% c(5, 6, 7, 8)) & nivel_educ == 3 ~ 4, #clase media: asalariado + profesional
+    situacion_ocupacional %in% c(2, 3, 4, 5) & (tipo_trabajo_a %in% c(5, 6, 7, 8) | tipo_trabajo_b %in% c(5, 6, 7, 8)) & nivel_educ %in% c(1, 2) ~ 5, #clase trabajadora: asalariado + no profesional
+    situacion_ocupacional %in% c(1, 4, 5) & (tipo_trabajo_a %in% c(1, 3, 4) | tipo_trabajo_b %in% c(1, 3, 4)) & nivel_educ %in% c(1, 2) ~ 6, #autoempleados informales: autoempleado + no profesional
+    TRUE ~ NA
+  ))
+
+##--- 3.5 Posición política ----
+
+datos_2018 <- datos_2018 %>% 
+  mutate(posicion_pol_ord = case_when(
+    posicion_pol %in% c(0, 1, 2, 3) ~ 1, #Izquierda
+    posicion_pol %in% c(4, 5, 6) ~ 2, #centro
+    posicion_pol %in% c(7, 8, 9, 10) ~ 3, #derecha
+    posicion_pol %in% c(-1, -2, -6) ~ 4, #sin identificación
+    TRUE ~ NA
+  ))
+
+##--- 3.6 Confianza en instituciones políticas ----
+
+datos_2018 <- datos_2018 %>%
+  mutate(
+    conf_congreso = case_when(conf_congreso < 1 ~ NA, TRUE ~ conf_congreso),
+    conf_gob      = case_when(conf_gob < 1 ~ NA, TRUE ~ conf_gob),
+    conf_partido  = case_when(conf_partido < 1 ~ NA, TRUE ~ conf_partido)
+  )
+
+datos_2018 <- mutate(datos_2018,
+                conf_congreso = 4 - conf_congreso,
+                conf_gob = 4 - conf_gob,
+                conf_partido = 4 - conf_partido
+                )
+
+datos_2018 <- mutate(datos_2018,
+                conf_instituciones = conf_congreso + conf_gob + conf_partido)
+
+##--- 3.7 Sexo (1 = mujer) ----
+
+datos_2018 <- datos_2018 %>%
+  mutate(sexo = case_when(
+    sexo == 1 ~ 0,
+    sexo == 2 ~ 1,
+    sexo == -2 ~ NA
+  ))
+
+##--- 3.8 Edad ----
+datos_2018 <- datos_2018 %>%
+  mutate(edad = case_when(
+    edad < 1 ~ NA,
+    TRUE ~ edad
+  ))
+
+#---- 4. Limpieza de variables: latinobarómetro 2020 ----
+##---- 4.1. Seleccionar variables ----
+datos_2020 <- select(lb_2020, 
+                p15st.c, #Conf. en sindicatos
+                s24.a, s25, s24.b, reeduc.1, s4, #Clase social: sit. ocupacional; tipo de trabajo; nivel educacional; ingreso subjetivo
+                p18st, #Posici+on política
+                p13st.d, p13st.e, p13st.g, #Conf en: congreso, gob. y partidos políticos
+                sexo,
+                edad,
+                idenpa)
+
+##---- 4.2. Renombrar variables ----
+datos_2020 <- rename(datos_2020, 
+                conf_sindicato = p15st.c, 
+                situacion_ocupacional = s24.a,
+                tipo_trabajo_a = s25,
+                tipo_trabajo_b = s24.b,
+                nivel_educ = reeduc.1, 
+                ing_subj = s4, 
+                posicion_pol = p18st, 
+                conf_congreso = p13st.d,
+                conf_gob = p13st.e, 
+                conf_partido = p13st.g,
+                pais = idenpa)
+
+##--- 4.3 Confianza en sindicatos ----
+datos_2020 <- datos_2020 %>% 
+  mutate(conf_sindicato_dic = case_when(
+    conf_sindicato %in% c(1, 2) ~ 1,
+    conf_sindicato %in% c(3, 4) ~ 0,
+    TRUE ~ NA
+  ))
+
+##--- 4.4 Clase social ----
+
+datos_2020 <- datos_2020 %>% 
+  mutate(clase_social = case_when(
+    situacion_ocupacional %in% c(1, 4, 5) & (tipo_trabajo_a == 2 | tipo_trabajo_b == 2) & ing_subj == 1 ~ 1, #grandes empleadores: independiente + dueño de empresa + ingreso
+    situacion_ocupacional %in% c(1, 4, 5) & (tipo_trabajo_a == 2 | tipo_trabajo_b == 2) & ing_subj %in% c(2, 3, 4) ~ 2, #pequeños empleadores: independiente + dueño de empresa + ingreso
+    situacion_ocupacional %in% c(1, 4, 5) & (tipo_trabajo_a %in% c(1, 3, 4) | tipo_trabajo_b %in% c(1, 3, 4)) & nivel_educ == 7 ~ 3, #pequeña burguesía: autoempleado + profesional
+    situacion_ocupacional %in% c(2, 3, 4, 5) & (tipo_trabajo_a %in% c(5, 6, 7, 8) | tipo_trabajo_b %in% c(5, 6, 7, 8)) & nivel_educ == 7 ~ 4, #clase media: asalariado + profesional
+    situacion_ocupacional %in% c(2, 3, 4, 5) & (tipo_trabajo_a %in% c(5, 6, 7, 8) | tipo_trabajo_b %in% c(5, 6, 7, 8)) & nivel_educ != 7 ~ 5, #clase trabajadora: asalariado + no profesional
+    situacion_ocupacional %in% c(1, 4, 5) & (tipo_trabajo_a %in% c(1, 3, 4) | tipo_trabajo_b %in% c(1, 3, 4)) & nivel_educ != 7 ~ 6, #autoempleados informales: autoempleado + no profesional
+    TRUE ~ NA
+  ))
+
+
+##--- 4.5 Posición política ----
+
+datos_2020 <- datos_2020 %>% 
+  mutate(posicion_pol_ord = case_when(
+    posicion_pol %in% c(0, 1, 2, 3) ~ 1, #Izquierda
+    posicion_pol %in% c(4, 5, 6) ~ 2, #centro
+    posicion_pol %in% c(7, 8, 9, 10) ~ 3, #derecha
+    posicion_pol %in% c(97, -1, -2) ~ 4, #sin identificación
+    TRUE ~ NA
+  ))
+
+
+##--- 4.6 Confianza en instituciones políticas ----
+
+datos_2020 <- datos_2020 %>%
+  mutate(
+    conf_congreso = case_when(conf_congreso %in% c(-1, -2, -3, -4) ~ NA, TRUE ~ conf_congreso),
+    conf_gob      = case_when(conf_gob %in% c(-1, -2, -3, -4) ~ NA, TRUE ~ conf_gob),
+    conf_partido  = case_when(conf_partido %in% c(-1, -2, -3, -4) ~ NA, TRUE ~ conf_partido)
+  ) %>%
+  mutate(conf_congreso = 4 - conf_congreso,
+                conf_gob = 4 - conf_gob,
+                conf_partido = 4 - conf_partido,
+                conf_instituciones = conf_congreso + conf_gob + conf_partido
+                )
+
+##--- 4.7 Sexo (1 = mujer) ----
+
+datos_2020 <- datos_2020 %>%
+  mutate(sexo = case_when(
+    sexo == 1 ~ 0,
+    sexo == 2 ~ 1,
+    TRUE ~ NA
+  ))
+
+##--- 4.8 Edad ----
+datos_2020 <- datos_2020 %>%
+  mutate(edad = case_when(
+    edad < 1 ~ NA,
+    TRUE ~ edad
+  ))
+
+#--- 5. Unir las bases de datos ----
+datos_2018 <- datos_2018 %>% mutate(ano = 2018)
+datos_2020 <- datos_2020 %>% mutate(ano = 2020)
+
+datos_lb <- bind_rows(datos_2018, datos_2020)
+
+datos_lb_proc <- na.omit(datos_lb)
+
+#--- 6. Etiquetar variables ----
+datos_lb_proc$conf_sindicato_dic <- set_labels(datos_lb_proc$conf_sindicato_dic,labels = c("Mucha o algo de confianza" = 1,
+                                           "Poca o nada de confianza" = 0
+                                           ))
+
+datos_lb_proc <- datos_lb_proc %>% 
+  mutate(clase_social = case_when(
+    clase_social == 1  ~ "1. Gran empleador", 
+    clase_social == 2  ~ "2. Pequeño empleador",
+    clase_social == 3  ~ "3. Pequeño burgués formal",
+    clase_social == 4  ~ "4. Clase media",
+    clase_social == 5  ~ "5. Obrero",
+    clase_social == 6  ~ "6. Autoempleado informal"))
+
+datos_lb_proc <- datos_lb_proc %>% 
+  mutate(posicion_pol_ord = case_when(
+    posicion_pol_ord == 1  ~ "Izquierda", 
+    posicion_pol_ord == 2  ~ "Centro",
+    posicion_pol_ord == 3  ~ "Derecha",
+    posicion_pol_ord == 4  ~ "Ninguno"))
+
+datos_lb_proc <- datos_lb_proc %>% 
+  mutate(sexo = case_when(
+    sexo == 0  ~ "Hombre", 
+    sexo == 1  ~ "Mujer"))
+
+datos_lb_proc <- datos_lb_proc %>% 
+  mutate(pais = case_when(
+    pais == 32  ~ "ARG",
+    pais == 68  ~ "BOL",
+    pais == 76  ~ "BRA",
+    pais == 152 ~ "CHL",
+    pais == 170 ~ "COL",
+    pais == 188 ~ "CRI",
+    pais == 214 ~ "DOM",
+    pais == 218 ~ "ECU",
+    pais == 222 ~ "SLV",
+    pais == 320 ~ "GTM",
+    pais == 340 ~ "HND",
+    pais == 484 ~ "MEX",
+    pais == 558 ~ "NIC",
+    pais == 591 ~ "PAN",
+    pais == 600 ~ "PRY",
+    pais == 604 ~ "PER",
+    pais == 858 ~ "URY",
+    pais == 862 ~ "VEN"
+  ))
+
+datos_lb_proc <- select(datos_lb_proc, 
+                conf_sindicato_dic,
+                clase_social,
+                posicion_pol_ord,
+                conf_instituciones,
+                sexo, 
+                edad, 
+                pais, 
+                ano)
+
+saveRDS(datos_lb_proc, file = "output/datos_lb_proc.rds")
+
+frq(datos_lb_proc$conf_sindicato_dic)
+

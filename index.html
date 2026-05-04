@@ -63,6 +63,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
+  margin-bottom: 0em;
 }
 .hanging-indent div.csl-entry {
   margin-left:2em;
@@ -153,6 +154,7 @@ div.csl-indent {
       <div class="quarto-title-meta-heading">Fecha de publicación</div>
       <div class="quarto-title-meta-contents">
         <p class="date">3 de mayo de 2026</p>
+        <p class="date">3 de mayo de 2026</p>
       </div>
     </div>
     
@@ -195,7 +197,7 @@ div.csl-indent {
 <ul>
 <li><strong>Resumen del artículo seleccionado</strong></li>
 </ul>
-<p>El artículo investiga los factores individuales y contextuales que explican el nivel de confianza de la ciudadanía en los sindicatos latinoamericanos, para esto se utilizan los datos de la encuesta Latinobarómetro de los años 2018 y 2020. Los autores demuestran que, a nivel individual, la confianza sindical es significativamente mayor entre personas pertenecientes a la clase trabajadora y a la clase media asalariada, así como entre quienes se identifican políticamente con la izquierda y confían más en las instituciones políticas. A nivel contextual, el estudio revela que la legitimidad de los sindicatos varía según el modelo de capitalismo de cada país. La confianza tiende a ser mayor en naciones “neo-desarrollistas” (como Brasil y Uruguay) y más baja en países de “capitalismo tercerizado” (como México y Centroamérica). También encontraron que la confianza en los sindicatos en Chile es alta, siendo un país liberal-rentista con sindicatos débiles, y baja en países redistributivos-rentistas y desarrollistas. Finalmente, los investigadores analizan cómo la confianza en los sindicatos depende de variables contextuales como la informalidad laboral, la inflación, el nivel de desempleo y las movilizaciones sociales.</p>
+<p>El artículo investiga los factores individuales y contextuales que explican el nivel de confianza de la ciudadanía en los sindicatos latinoamericanos, para esto se utilizan los datos de la encuesta <a href="www.latinobarometro.org">Latinobarómetro</a> de los años 2018 y 2020. Los autores demuestran que, a nivel individual, la confianza sindical es significativamente mayor entre personas pertenecientes a la clase trabajadora y a la clase media asalariada, así como entre quienes se identifican políticamente con la izquierda y confían más en las instituciones políticas. A nivel contextual, el estudio revela que la legitimidad de los sindicatos varía según el modelo de capitalismo de cada país. La confianza tiende a ser mayor en naciones “neo-desarrollistas” (como Brasil y Uruguay) y más baja en países de “capitalismo tercerizado” (como México y Centroamérica). También encontraron que la confianza en los sindicatos en Chile es alta, siendo un país liberal-rentista con sindicatos débiles, y baja en países redistributivos-rentistas y desarrollistas. Finalmente, los investigadores analizan cómo la confianza en los sindicatos depende de variables contextuales como la informalidad laboral, la inflación, el nivel de desempleo y las movilizaciones sociales.</p>
 <ul>
 <li><strong>Justificación de la selección del artículo</strong></li>
 </ul>
@@ -204,7 +206,7 @@ div.csl-indent {
 <span class="header-section-number">2</span> Evaluación de reproducibilidad</h1>
 <ul>
 <li><p><strong>Disponibilidad de datos y códigos</strong>: El artículo proporciona acceso a los datos y códigos utilizados en el estudio. Ambos se encuentran disponibles de forma abierta en la página oficial de publicación del artículo correspondiente a <a href="https://doi.org/10.1017/lar.2024.64">Cambridge University Press</a>. Para acceder a esta se debe entrar a Supplementary materials, donde se debe descargar el archivo Word adjunto. Tras descargarlo, en el documento se encuentra un enlace que dirige a un <a href="https://osf.io/tdh89/overview?view_only=be70c0c83be948b6bbcc8e8b5a899d91">repositorio de libre acceso</a>, en el cual se encuentran los archivos mencionados. El repositorio solo dispone de la base de datos procesada (que unifica las bases de ambos años), junto con los códigos de análisis individual y contextual, y las variables contextuales. Notablemente, no se encuentran disponibles las bases de datos originales de los años 2018 y 2020 ni el código empleado en la limpieza de los datos, lo que impide reproducir el flujo completo desde los datos brutos del Latinobarómetro hasta los resultados publicados.</p></li>
-<li><p><strong>Documentación</strong>: Si bien se identifican la fuente de datos, el período de análisis y la estrategia de modelamiento, la documentación del artículo presenta algunas limitaciones que dificultan su reproducibilidad técnica. Aunque se reporta el uso de la encuesta Latinobarómetro y se detalla una muestra final de 25.286 observaciones, el texto omite la justificación de decisiones analíticas fundamentales, como el criterio utilizado para el tratamiento de los valores perdidos (NAs) que permitió llegar a ese tamaño muestral exacto. A nivel de medición, la descripción presenta imprecisiones importantes; por ejemplo, la construcción de la categoría de ‘clase social’ resulta ambigua al no explicitar la distribución empírica de los casos bajo el esquema de Wright, y tampoco se clarifican las variaciones en los códigos de los cuestionarios entre las rondas de 2018 y 2020. Finalmente, y como se mencionó con anterioridad, dentro del repositorio se dispone únicamente de la base de datos ya procesada, y prescinde de scripts o de una explicación exhaustiva sobre el procedimiento de limpieza dentro del artículo.</p></li>
+<li><p><strong>Documentación</strong>: Si bien se identifican la fuente de datos, el período de análisis y la estrategia de modelamiento, la documentación del artículo presenta algunas limitaciones que dificultan su reproducibilidad técnica. Aunque se reporta el uso de la encuesta Latinobarómetro y se detalla una muestra final de 25.286 observaciones, el texto omite la justificación de decisiones analíticas fundamentales, como el criterio utilizado para el tratamiento de los valores perdidos (NAs) que permitió llegar a ese tamaño muestral exacto. A nivel de medición, la descripción presenta imprecisiones importantes; por ejemplo, la construcción de la categoría de ‘clase social’ resulta ambigua al no explicitar <span class="citation" data-cites="perez-ahumada_politica_2025">Pérez-Ahumada &amp; Carrasco (<a href="#ref-perez-ahumada_politica_2025" role="doc-biblioref">2025</a>)</span> la distribución empírica de los casos bajo el esquema de Wright, y tampoco se clarifican las variaciones en los códigos de los cuestionarios entre las rondas de 2018 y 2020. Finalmente, y como se mencionó con anterioridad, dentro del repositorio se dispone únicamente de la base de datos ya procesada, y prescinde de scripts o de una explicación exhaustiva sobre el procedimiento de limpieza dentro del artículo.</p></li>
 <li><p><strong>Transparencia</strong>: El artículo es transparente sobre el respaldo académico. Se declara explícitamente que el proyecto fue financiado por ANID/FONDECYT REGULAR 1230056 (“Clases sociales, movimientos obreros y conflicto en tiempos de crisis: Un estudio comparativo de Argentina y Chile”, IP: Pablo Pérez Ahumada) y por COES ANID/FONDAP 1523A0005. Además, los autores mencionan que el texto es un artículo de acceso abierto, distribuido bajo los términos de la licencia Creative Commons Attribution, lo que permite su libre lectura, distribución y reproducción. Por último, se menciona que los autores son parte de instituciones como la Universidad de Chile y el Centro de Estudios de Conflicto y Cohesión Social.</p></li>
 </ul></section><section id="análisis-reproducible" class="level1" data-number="3"><h1 data-number="3">
 <span class="header-section-number">3</span> Análisis reproducible</h1>
@@ -214,8 +216,17 @@ div.csl-indent {
 <p>La primera imagen que se busca reproducir presenta dos gráficos de líneas (paneles a y b) que ilustran cómo cambia la probabilidad de que las personas confíen en los sindicatos según la clase social y la posición política, comparando los años 2018 (línea gris con círculos) y 2020 (línea negra con triángulos). Ambos gráficos incluyen barras de error que indican la precisión de las estimaciones.</p>
 <p><strong>Panel (a):</strong> Muestra que la confianza en los sindicatos tiende a aumentar progresivamente desde los empleadores hacia la clase trabajadora y la clase media, los cuales presentan los niveles más altos, superando el 30%. Además, se observa que en casi todas las clases sociales hubo una leve caída en la confianza entre 2018 y 2020, excepto en la clase media donde se mantuvo estable.</p>
 <p><strong>Panel (b):</strong> Se observa que la confianza en sindicatos aumenta a medida que la posición se mueve hacia la izquierda. Las personas sin posición política o de derecha muestran menores niveles de confianza (alrededor de 20–25%), mientras que quienes se identifican con la izquierda presentan los niveles más altos (cerca de 30%). Al igual que en el panel anterior, la confianza general en los sindicatos fue ligeramente menor en 2020 en comparación con 2018 para casi todos los grupos políticos.</p>
-<p><img src="input/images/figura1_original.png" class="img-fluid"></p>
-<p>La segunda imagen corresponde a un gráfico de líneas que muestra la probabilidad de confiar en los sindicatos a través de 18 países de América Latina, comparando nuevamente los resultados del año 2018 (línea gris con círculos) y el 2020 (línea negra con triángulos).</p>
+<div id="fig-figura-1" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-cap="Probabilidad de confiar en un sindicato por clase social y posición política, año 2018 y 2020 (Figura original)">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-figura-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="input/images/figura1_original.png" id="fig-figura-1" class="img-fluid figure-img" data-fig-cap="Probabilidad de confiar en un sindicato por clase social y posición política, año 2018 y 2020 (Figura original)">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-figura-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;1
+</figcaption>
+</figure>
+</div>
+<p>La <a href="#fig-figura-2" class="quarto-xref">Figura&nbsp;2</a> corresponde a un gráfico de líneas que muestra la probabilidad de confiar en los sindicatos a través de 18 países de América Latina, comparando nuevamente los resultados del año 2018 (línea gris con círculos) y el 2020 (línea negra con triángulos).</p>
 <p>Entre los principales hallazgos está que existe una gran diferencia en cómo se percibe a los sindicatos en la región. En el extremo inferior, países como Venezuela (VEN) muestran los niveles más bajos de confianza (alrededor del 10-15%). En el extremo opuesto, Chile (CHL) es el país con mayor probabilidad de confianza en los sindicatos, superando el 40% en ambos años. Además, se observa una caída generalizada de la confianza entre los años 2018 y 2020. En la mayoría de los países, la línea negra (2020) se ubica por debajo de la línea gris (2018).</p>
 <p><img src="input/images/figura2_original.png" class="img-fluid"></p>
 </section><section id="proceso-de-reproducción" class="level2" data-number="3.2"><h2 data-number="3.2" class="anchored" data-anchor-id="proceso-de-reproducción">
@@ -606,6 +617,23 @@ div.csl-indent {
 </div>
 </div>
 </div>
+<p><strong>Figura 4: Probabilidad de confiar en un sindicato por país y año</strong> Similar al procedimiento que se hizo anteriormente, se calcularon modelos de regresión logística con interacciones entre país y año, controlando por las demás variables, tanto para la base reproducida como para la base original.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co">#---- 5. Figura 4: Interaccion pais*año (ordenado de menor a mayor confianza) ----</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>log3a<span class="ot">&lt;-</span> <span class="fu">glm</span>(conf_sindicato_dic <span class="sc">~</span> clase_social<span class="sc">+</span>sexo<span class="sc">+</span>edad<span class="sc">+</span>pais<span class="sc">+</span>ano<span class="sc">+</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>             conf_instituciones<span class="sc">+</span>posicion_pol_ord<span class="sc">+</span>pais<span class="sc">*</span>ano,</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">data =</span> datos_lb_proc,</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>           <span class="at">family =</span> <span class="st">"binomial"</span>) </span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>log3b<span class="ot">&lt;-</span> <span class="fu">glm</span>(trustunions_life_dummy <span class="sc">~</span> class3<span class="sc">+</span>female<span class="sc">+</span>edad<span class="sc">+</span>pais<span class="sc">+</span>ano<span class="sc">+</span></span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>             trust_pol_institutions<span class="sc">+</span>pol_pos<span class="sc">+</span>pais<span class="sc">*</span>ano,</span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>           <span class="at">data =</span> Latinobarometro18_20_LARR,</span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>           <span class="at">family =</span> <span class="st">"binomial"</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p>Luego, se generaron gráficos de predicciones ajustadas para cada país y año, y se compararon los resultados entre ambas bases de datos. En la <a href="#fig-figura-4" class="quarto-xref">Figura&nbsp;4</a> se presentan los resultados de la reproducción y comparación para la interacción entre país y año, donde el panel (a) muestra la reproducción utilizando la base de datos procesada, mientras que en el panel (b) compara los resultados obtenidos con la base reproducida y la base original proporcionada por los autores. En ambos gráficos, los países están ordenados de menor a mayor confianza en sindicatos para facilitar la comparación visual entre ambos años.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">

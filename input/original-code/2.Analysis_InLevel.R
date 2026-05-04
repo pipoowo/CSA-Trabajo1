@@ -1,13 +1,3 @@
-# Apéndice
-
-## Código
-
-Se presenta el código original de análisis utilizado por @perez-ahumada_politica_2025.
-
-```{r}
-#| echo: true
-#| eval: false
-
 #Individual level analysis
 
 #Remove
@@ -21,11 +11,12 @@ pacman::p_load(lme4,reghelper,haven,stargazer,ggplot2,dplyr, patchwork,
 
 
 # 2. Load data N = 25,286 ------------------------------------------------------
-Latinobarometro18_20_LARR<- readRDS(file = "input/Latinobarometro18_20_LARR.rds")
+Latinobarometro18_20_LARR<- readRDS(file = "Latinobarometro18_20_LARR.rds")
 
-
+httpgd::hgd()
 Latinobarometro18_20_LARR <- as.data.frame(Latinobarometro18_20_LARR) #para evitar error en figuras 
 
+Int_Clase_Ano
 
 #3 Logistic regressions: trust in unions  -----
 
@@ -193,25 +184,26 @@ Int_Clase_Ano<-ggpredict(log2,terms = c("class3","ano")) %>%
   geom_errorbar(aes(ymin = conf.low, ymax = conf.high), width=.1,position = position_dodge(.1))+
   labs(title="", x = "", y = "")+
   scale_x_discrete(labels=c("1. Gran empleador"="Empleadores",
-                            "2. Pequeño empleador"="Pequeños\nempleadores",
-                            "3. Pequeño burgués formal" = "Pequeña\nburguesía",
-                            "4. Clase media"="Clase\nmedia",
-                            "5. Obrero"="Clase\ntrabajadora",
+                            "2. Pequeño empleador"="Pequenos empleadores",
+                            "3. Pequeño burgues formal" = "Pequeña burguesia",
+                            "4. Clase media"="Clase media",
+                            "5. Obrero"="Clase trabajadora",
                             "6. Autoempleado informal"="Autoempleados\ninformales"))+
-  scale_shape_discrete(name = "Año",
+  scale_shape_discrete(name = "Ano",
                        limits = c("2018", "2020"),
                        labels = c("2018", "2020")) +
-  scale_color_manual(name = "Año",
+  scale_color_manual(name = "Ano",
                      limits = c("2018", "2020"),
                      labels = c("2018", "2020"),
                      values = c("gray60", "black")) +
   scale_y_continuous(limits = c(0,0.45),breaks=seq(0,0.45, by = 0.05),
                      labels = scales::percent_format(accuracy = 1L)) +
   theme_bw() +
-  labs(title="a) Clase*Año", y = "") + 
+  labs(title="a) Clase*Ano", y = "") + 
   theme(plot.title = element_text(size = 11),
         axis.text=element_text(size=10))
 
+Sys.setlocale("LC_ALL", "Spanish")
 
 #Interaccion pol position /año
 Int_PolPos_Ano<-ggpredict(log3,terms = c("pol_pos","ano")) %>% 
@@ -278,8 +270,6 @@ ggsave(Int_Pais_Ano, filename = "Figure2.png",
        width = 22,height = 8)
 
 
-Figura1
-Int_Pais_Ano
 
 #6. CONTEXTUAL LEVEL DATA (Modelo + otras variables)--------
 
@@ -458,448 +448,4 @@ Latinobarometro18_20_LARR %>%
   select(edad,trust_pol_institutions) %>% 
   sum_up(d = FALSE, wt = NULL)
 
-#Contextual analysis - correlaciones bivariadas
 
-#Remove
-rm(list = ls())
-getwd()
-
-# 1. Load packages --------------------------------------------------------
-pacman::p_load(lme4,reghelper,haven,stargazer,ggplot2,dplyr,patchwork,
-               texreg,ggeffects,sjmisc,statar,summarytools,psych,sjPlot,
-               plm,lmtest,foreign,readxl)
-
-
-# 2. Load data N = 18 ------------------------------------------------------
-
-#Datos 2018 -------
-ConfSindicatosAL2018<- read_xlsx("Data/Variables_contextuales2018_LARR.xlsx",
-                             sheet = "Base_final",
-                             range = NULL,
-                             col_names = TRUE,
-                             col_types = NULL,
-                             na = "")
-
-# Datos sin Argentina
-ConfSindicatosAL_NoArg2018<-filter(ConfSindicatosAL2018,Pais != "ARG")
-
-# Datos sin Venezuela
-ConfSindicatosAL_NoVzla2018<-filter(ConfSindicatosAL2018,Pais != "VEN")
-
-# Datos sin Argentina ni Venezuela
-ConfSindicatosAL_NoArgVzla2018<-filter(ConfSindicatosAL2018,Pais != "ARG" & Pais != "VEN")
-
-
-
-
-#Datos 2020 -------
-ConfSindicatosAL<- read_xlsx("Data/Variables_contextuales2020_LARR.xlsx",
-                        sheet = "Base_final",
-                        range = NULL,
-                        col_names = TRUE,
-                        col_types = NULL,
-                        na = "")
-
-
-# Datos sin Argentina
-ConfSindicatosAL_NoArg<-filter(ConfSindicatosAL,Pais != "ARG")
-
-# Datos sin Venezuela
-ConfSindicatosAL_NoVzla<-filter(ConfSindicatosAL,Pais != "VEN")
-
-# Datos sin Argentina ni Venezuela
-ConfSindicatosAL_NoArgVzla<-filter(ConfSindicatosAL,Pais != "ARG" & Pais != "VEN")
-
-
-
-view_df(ConfSindicatosAL)
-
-# 2.1. Descriptivos (2020)-----------
-
-#Estadísticos descriptivos. N = 18
-ConfSindicatosAL %>% 
-  select(Confianza_sindicatos,Informalidad,Poder_percibido,
-         gobizq_2000_20,
-         Desocupacion2020,IPC,IPC_log,
-         Manif_Dif_2000_2010) %>% 
-  sum_up(d = FALSE, wt = NULL)
-
-
-#Estadísticos descriptivos. N = 17 (No Arg)
-ConfSindicatosAL_NoArg %>% 
-  select(Confianza_sindicatos,Informalidad,Poder_percibido_100,
-         gobizq_2000_20,
-         Desocupacion2020,IPC,IPC_log,
-         Manif_Dif_2000_2010) %>% 
-  sum_up(d = FALSE, wt = NULL)
-
-#Estadísticos descriptivos. N = 17 (No Ven)
-ConfSindicatosAL_NoVzla %>% 
-  select(Confianza_sindicatos,Informalidad,Poder_percibido_100,
-         gobizq_2000_20,
-         Desocupacion2020,IPC,IPC_log,
-         Manif_Dif_2000_2010) %>% 
-  sum_up(d = FALSE, wt = NULL)
-
-
-
-# 3. Correlation matrix------
-
-# Datos 2018-----
-#N = 18
-ConfSindicatosAL2018 %>%
-  select(Confianza_sindicatos,Informalidad,
-         gobizq_2000_18,
-         Desocupacion2018,IPC,IPC_log,
-         Manif_Dif_15_08_Porc) %>% 
-  corr.test(., alpha = 0.05,
-            method='pearson') 
-
-
-#N = 17 (sin Venezuela): Corr Inflación = -0,30
-ConfSindicatosAL_NoVzla2018 %>%
-  select(Confianza_sindicatos,
-         IPC,IPC_log) %>% 
-  corr.test(., alpha = 0.05,
-            method='pearson') 
-
-#N = 16 (sin Argentina ni Venezuela): Corr Inflación = -0,1
-ConfSindicatosAL_NoArgVzla2018 %>%
-  select(Confianza_sindicatos,
-         IPC,IPC_log) %>% 
-  corr.test(., alpha = 0.05,
-            method='pearson') 
-
-
-
-# 2020-----
-#N = 18
-ConfSindicatosAL %>%
-  select(Confianza_sindicatos,Informalidad,Poder_percibido_100,
-         gobizq_2000_20,
-         Desocupacion2020,IPC,IPC_log,
-         Manif_Dif_2000_2010) %>% 
-  corr.test(., alpha = 0.05,
-            method='pearson') 
-
-#N = 17 (sin Argentina): Corr poder percibido = -0,11
-ConfSindicatosAL_NoArg %>%
-  select(Confianza_sindicatos,
-         Poder_percibido_100) %>% 
-  corr.test(., alpha = 0.05,
-            method='pearson') 
-
-
-#N = 17 (sin Venezuela): Corr Inflación = -0,33
-ConfSindicatosAL_NoVzla %>%
-  select(Confianza_sindicatos,
-         IPC,IPC_log) %>% 
-  corr.test(., alpha = 0.05,
-            method='pearson') 
-
-#N = 16 (sin Argentina ni Venezuela): Corr Inflación = -0,33
-ConfSindicatosAL_NoArgVzla %>%
-  select(Confianza_sindicatos,
-         IPC,IPC_log) %>% 
-  corr.test(., alpha = 0.05,
-            method='pearson') 
-
-
-# 4.2 Gráficos correlaciones 2018----
-
-# a) Informalidad
-
-Fig1_Informalidad2018<-ggplot(ConfSindicatosAL2018, aes(x=Informalidad, 
-                                                y=Confianza_sindicatos,
-                                                label=Pais)) +
-  geom_point()+
-  geom_smooth(method=lm, se=FALSE)+
-  geom_text(hjust=0, vjust=-1, size=3)+
-  annotate(geom="text", x=75, y=0.025, label="r de Pearson = -0,34",fontface="bold")+
-  theme_bw()+
-  labs(title="a) Informalidad laboral (2018)", 
-       x = "Tasa de informalidad", y = "Prob. de confiar en sindicatos")+
-  theme(plot.title = element_text(size = 12), 
-        axis.text.x = element_text(angle = 0, vjust = 0.5, size = 10),
-        axis.text.y = element_text(vjust = 0.5, size = 10))+
-  scale_x_continuous(breaks=seq(from = 0, to = 90, by = 10))+
-  scale_y_continuous(breaks=c(0.1,0.2,0.3,0.4,0.5), limits = c(0,0.5))
-
-
-# b) Desocupacion
-Fig2_Desocup2018<-ggplot(ConfSindicatosAL2018, aes(x=Desocupacion2018, 
-                                               y=Confianza_sindicatos,
-                                               label=Pais)) +
-  geom_point()+
-  geom_smooth(method=lm, se=FALSE)+
-  geom_text(hjust=0, vjust=-1, size=3)+
-  annotate(geom="text", x=11, y=0.025, label="r de Pearson = 0,32",fontface="bold")+
-  theme_bw()+
-  labs(title="b) Desocupación (2018)", 
-       x = "Tasa de desocupación", y = " ")+
-  theme(plot.title = element_text(size = 12), 
-        axis.text.x = element_text(angle = 0, vjust = 0.5, size = 10),
-        axis.text.y = element_text(vjust = 0.5, size = 10))+
-  scale_x_continuous(breaks=seq(from = 0, to = 13, by = 1))+
-  scale_y_continuous(breaks=c(0.1,0.2,0.3,0.4,0.5), limits = c(0,0.5))
-
-
-# c) Inflación (IPC log)
-Fig3_Inflacion2018<-ggplot(ConfSindicatosAL2018, aes(x=IPC_log, 
-                                                     y=Confianza_sindicatos,
-                                                     label=Pais)) +
-  geom_point()+
-  geom_smooth(method=lm, se=FALSE)+
-  geom_text(hjust=0, vjust=-1, size=3)+
-  annotate(geom="text", x=8.5, y=0.025, label="r de Pearson = -0,40",fontface="bold")+
-  theme_bw()+
-  labs(title="c) Inflación (2018)", 
-       x = "Índice anual de precios al consumidor (log)", y = "Prob. de confiar en sindicatos")+
-  theme(plot.title = element_text(size = 12), 
-        axis.text.x = element_text(angle = 0, vjust = 0.5, size = 10),
-        axis.text.y = element_text(vjust = 0.5, size = 10))+
-  scale_x_continuous(breaks=seq(from = -1, to = 12, by = 1))+
-  scale_y_continuous(breaks=c(0.1,0.2,0.3,0.4,0.5), limits = c(0,0.5))
-
-# d) Inflación (IPC log): Sin Argentina ni Venezuela 
-Fig4_Inflacion_NoArgVzla2018<-ggplot(ConfSindicatosAL_NoArgVzla2018, aes(x=IPC_log, 
-                                                                         y=Confianza_sindicatos,
-                                                                         label=Pais)) +
-  geom_point()+
-  geom_smooth(method=lm, se=FALSE)+
-  geom_text(hjust=0, vjust=-1, size=3)+
-  annotate(geom="text", x=1.5, y=0.025, label="r de Pearson = -0,10",fontface="bold")+
-  theme_bw()+
-  labs(title="d) Inflación 2018 (sin Argentina ni Venezuela)", 
-       x = "Índice anual de precios al consumidor (log)", y = " ")+
-  theme(plot.title = element_text(size = 12), 
-        axis.text.x = element_text(angle = 0, vjust = 0.5, size = 10),
-        axis.text.y = element_text(vjust = 0.5, size = 10))+
-  scale_x_continuous(breaks=seq(from = -1.5, to = 2.5, by = 0.5))+
-  scale_y_continuous(breaks=c(0.1,0.2,0.3,0.4,0.5), limits = c(0,0.5))
-
-
-# e) Poder de partidos de izquierda
-Fig5_PoderIzq2018<-ggplot(ConfSindicatosAL2018, aes(x=gobizq_2000_18, 
-                                            y=Confianza_sindicatos,
-                                            label=Pais)) +
-  geom_point()+
-  geom_smooth(method=lm, se=FALSE)+
-  geom_text(hjust=0, vjust=-1, size=3)+
-  annotate(geom="text", x=15, y=0.025, label="r de Pearson = 0,29",fontface="bold")+
-  theme_bw()+
-  labs(title="e) Años de gobiernos de izquierda (2000 - 2018)", 
-       x = "Años de gobiernos de izquierda", y = "Prob. de confiar en sindicatos")+
-  theme(plot.title = element_text(size = 12), 
-        axis.text.x = element_text(angle = 0, vjust = 0.5, size = 10),
-        axis.text.y = element_text(vjust = 0.5, size = 10))+
-  scale_x_continuous(breaks=seq(from = 0, to = 20, by = 1))+
-  scale_y_continuous(breaks=c(0.1,0.2,0.3,0.4,0.5), limits = c(0,0.5))
-
-
-# f) Movilización social 
-Fig6_Movilizacion2018<-ggplot(ConfSindicatosAL2018, aes(x=Manif_Dif_15_08_Porc, 
-                                                y=Confianza_sindicatos,
-                                                label=Pais)) +
-  geom_point()+
-  geom_smooth(method=lm, se=FALSE)+
-  geom_text(hjust=0, vjust=-1, size=3)+
-  annotate(geom="text", x=16, y=0.025, label="r de Pearson = 0,69",fontface="bold")+
-  theme_bw()+
-  labs(title="f) Cambio en la disposición a la acción colectiva (2008 - 2015)", 
-       x = "Disposición a marchar y protestar", y = "")+
-  theme(plot.title = element_text(size = 12), 
-        axis.text.x = element_text(angle = 0, vjust = 0.5, size = 10),
-        axis.text.y = element_text(vjust = 0.5, size = 10))+
-  scale_x_continuous(breaks=seq(from = -16, to = 22, by = 2))+
-  scale_y_continuous(breaks=c(0.1,0.2,0.3,0.4,0.5), limits = c(0,0.5))
-
-
-
-
-
-# Patchwork 2018: Figuras 1 - 6 ------
-
-#FIGURE 3.1 (todas las figuras juntas)
-
-Figura3.1<- (Fig1_Informalidad2018 | Fig2_Desocup2018) 
-Figura3.2<- (Fig3_Inflacion2018 | Fig4_Inflacion_NoArgVzla2018)
-Figura3.3<- (Fig5_PoderIzq2018 | Fig6_Movilizacion2018) 
-
-#Save 
-ggsave(Figura3.1, filename = "Figura3.1.png",
-       device = "png",dpi = "retina", units = "cm",
-       width = 32,height = 12)
-#Save 
-ggsave(Figura3.2, filename = "Figura3.2.png",
-       device = "png",dpi = "retina", units = "cm",
-       width = 32,height = 12)
-#Save 
-ggsave(Figura3.3, filename = "Figura3.3.png",
-       device = "png",dpi = "retina", units = "cm",
-       width = 32,height = 12)
-
-
-
-
-# 4.2 Gráficos correlaciones 2020----
-
-# 4.1. Informalidad
-
-Fig1_Informalidad<-ggplot(ConfSindicatosAL, aes(x=Informalidad, 
-                                                y=Confianza_sindicatos,
-                                                label=Pais)) +
-  geom_point()+
-  geom_smooth(method=lm, se=FALSE)+
-  geom_text(hjust=0, vjust=-1, size=3)+
-  annotate(geom="text", x=75, y=0.025, label="r de Pearson = -0,34",fontface="bold")+
-  theme_bw()+
-  labs(title="a) Informalidad laboral ", 
-       x = "Tasa de informalidad", y = "Prob. de confiar en sindicatos")+
-  theme(plot.title = element_text(size = 12), 
-        axis.text.x = element_text(angle = 0, vjust = 0.5, size = 10),
-        axis.text.y = element_text(vjust = 0.5, size = 10))+
-  scale_x_continuous(breaks=seq(from = 0, to = 90, by = 10))+
-  scale_y_continuous(breaks=c(0.1,0.2,0.3,0.4,0.5), limits = c(0,0.5))
-
-
-# 4.2 Poder atribuido a los sindicatos
-Fig2_PoderAtribuido<-ggplot(ConfSindicatosAL, aes(x=Poder_percibido_100, 
-                                                  y=Confianza_sindicatos,
-                                                  label=Pais)) +
-  geom_point()+
-  geom_smooth(method=lm, se=FALSE)+
-  geom_text(hjust=0, vjust=-1, size=3)+
-  annotate(geom="text", x=45, y=0.025, label="r de Pearson = -0,34",fontface="bold")+
-  theme_bw()+
-  labs(title="b) Poder atribuido a los sindicatos", 
-       x = "Poder atribuido", y = " ")+
-  theme(plot.title = element_text(size = 12), 
-        axis.text.x = element_text(angle = 0, vjust = 0.5, size = 10),
-        axis.text.y = element_text(vjust = 0.5, size = 10))+
-  scale_x_continuous(breaks=seq(from = 0, to = 55, by = 5))+
-  scale_y_continuous(breaks=c(0.1,0.2,0.3,0.4,0.5), limits = c(0,0.5))
-
-
-# 4.3 Poder atribuido a los sindicatos: sin Argentina
-Fig3_PoderAtribuido_NoArg<-ggplot(ConfSindicatosAL_NoArg, aes(x=Poder_percibido_100, 
-                                                  y=Confianza_sindicatos,
-                                                  label=Pais)) +
-  geom_point()+
-  geom_smooth(method=lm, se=FALSE)+
-  geom_text(hjust=0, vjust=-1, size=3)+
-  annotate(geom="text", x=21, y=0.025, label="r de Pearson = -0,11",fontface="bold")+
-  theme_bw()+
-  labs(title="c) Poder atribuido a los sindicatos (sin Argentina)", 
-       x = "Poder atribuido", y = "Prob. de confiar en sindicatos")+
-  theme(plot.title = element_text(size = 12), 
-        axis.text.x = element_text(angle = 0, vjust = 0.5, size = 10),
-        axis.text.y = element_text(vjust = 0.5, size = 10))+
-  scale_x_continuous(breaks=seq(from = 0, to = 26, by = 2))+
-  scale_y_continuous(breaks=c(0.1,0.2,0.3,0.4,0.5), limits = c(0,0.5))
-
-# 4.4 Poder de partidos de izquierda
-Fig4_PoderIzq<-ggplot(ConfSindicatosAL, aes(x=gobizq_2000_20, 
-                                            y=Confianza_sindicatos,
-                                            label=Pais)) +
-  geom_point()+
-  geom_smooth(method=lm, se=FALSE)+
-  geom_text(hjust=0, vjust=-1, size=3)+
-  annotate(geom="text", x=15, y=0.025, label="r de Pearson = 0,25",fontface="bold")+
-  theme_bw()+
-  labs(title="d) Años de gobiernos de izquierda (2000 - 2020)", x = "Años de gobiernos de izquierda", y = " ")+
-  theme(plot.title = element_text(size = 12), 
-        axis.text.x = element_text(angle = 0, vjust = 0.5, size = 10),
-        axis.text.y = element_text(vjust = 0.5, size = 10))+
-  scale_x_continuous(breaks=seq(from = 0, to = 20, by = 1))+
-  scale_y_continuous(breaks=c(0.1,0.2,0.3,0.4,0.5), limits = c(0,0.5))
-
-# 4.5 Desocupacion
-Fig5_Desocup<-ggplot(ConfSindicatosAL, aes(x=Desocupacion2020, 
-                                            y=Confianza_sindicatos,
-                                            label=Pais)) +
-  geom_point()+
-  geom_smooth(method=lm, se=FALSE)+
-  geom_text(hjust=0, vjust=-1, size=3)+
-  annotate(geom="text", x=16, y=0.025, label="r de Pearson = 0,27",fontface="bold")+
-  theme_bw()+
-  labs(title="d) Desocupación", 
-       x = "Tasa de desocupación", y = "Prob. de confiar en sindicatos")+
-  theme(plot.title = element_text(size = 12), 
-        axis.text.x = element_text(angle = 0, vjust = 0.5, size = 10),
-        axis.text.y = element_text(vjust = 0.5, size = 10))+
-  scale_x_continuous(breaks=seq(from = 0, to = 19, by = 1))+
-  scale_y_continuous(breaks=c(0.1,0.2,0.3,0.4,0.5), limits = c(0,0.5))
-
-
-#4.6 Inflación (IPC log)
-Fig6_Inflacion<-ggplot(ConfSindicatosAL, aes(x=IPC_log, 
-                                           y=Confianza_sindicatos,
-                                           label=Pais)) +
-  geom_point()+
-  geom_smooth(method=lm, se=FALSE)+
-  geom_text(hjust=0, vjust=-1, size=3)+
-  annotate(geom="text", x=12, y=0.025, label="r de Pearson = -0,34",fontface="bold")+
-  theme_bw()+
-  labs(title="e) Inflación", x = "Índice anual de precios al consumidor (log)", y = " ")+
-  theme(plot.title = element_text(size = 12), 
-        axis.text.x = element_text(angle = 0, vjust = 0.5, size = 10),
-        axis.text.y = element_text(vjust = 0.5, size = 10))+
-  scale_x_continuous(breaks=seq(from = 4, to = 14, by = 1))+
-  scale_y_continuous(breaks=c(0.1,0.2,0.3,0.4,0.5), limits = c(0,0.5))
-
-#4.7 Inflación (IPC log): Sin Argentina ni Venezuela 
-Fig7_Inflacion_NoArgVzla<-ggplot(ConfSindicatosAL_NoArgVzla, aes(x=IPC_log, 
-                                             y=Confianza_sindicatos,
-                                             label=Pais)) +
-  geom_point()+
-  geom_smooth(method=lm, se=FALSE)+
-  geom_text(hjust=0, vjust=-1, size=3)+
-  annotate(geom="text", x=4.75, y=0.025, label="r de Pearson = 0,15",fontface="bold")+
-  theme_bw()+
-  labs(title="f) Inflación (sin Argentina ni Venezuela)", 
-       x = "Índice anual de precios al consumidor (log)", y = "Prob. de confiar en sindicatos")+
-  theme(plot.title = element_text(size = 12), 
-        axis.text.x = element_text(angle = 0, vjust = 0.5, size = 10),
-        axis.text.y = element_text(vjust = 0.5, size = 10))+
-  scale_x_continuous(breaks=seq(from = 4.2, to = 4.8, by = 0.02))+
-  scale_y_continuous(breaks=c(0.1,0.2,0.3,0.4,0.5), limits = c(0,0.5))
-
-
-# 4.8. Movilización social
-Fig8_Movilizacion<-ggplot(ConfSindicatosAL, aes(x=Manif_Dif_2000_2010, 
-                                                  y=Confianza_sindicatos,
-                                                  label=Pais)) +
-  geom_point()+
-  geom_smooth(method=lm, se=FALSE)+
-  geom_text(hjust=0, vjust=-1, size=3)+
-  annotate(geom="text", x=0.40, y=0.025, label="r de Pearson = 0,58",fontface="bold")+
-  theme_bw()+
-  labs(title="g) Cambio en la disposición a la acción colectiva (décadas 2000 - 2010)", 
-       x = "Disposición a la acción colectiva", y = "")+
-  theme(plot.title = element_text(size = 12), 
-        axis.text.x = element_text(angle = 0, vjust = 0.5, size = 10),
-        axis.text.y = element_text(vjust = 0.5, size = 10))+
-  scale_x_continuous(breaks=seq(from = -0.35, to = 0.55, by = 0.1))+
-  scale_y_continuous(breaks=c(0.1,0.2,0.3,0.4,0.5), limits = c(0,0.5))
-
-
-
-
-
-# Patcwork 2020: Figuras 1 - 4 ------
-
-#FIGURE 3.1 (todas las figuras juntas)
-Figura3.1<- (Fig1_Informalidad | Fig2_PoderAtribuido) / (Fig3_PoderAtribuido_NoArg | Fig4_PoderIzq) 
-Figura3.2<- (Fig5_Desocup | Fig6_Inflacion) / (Fig7_Inflacion_NoArgVzla | Fig8_Movilizacion)
-
-#Save 
-ggsave(Figura3.1, filename = "Figura3.1.png",
-       device = "png",dpi = "retina", units = "cm",
-       width = 32,height = 15)
-#Save 
-ggsave(Figura3.2, filename = "Figura3.2.png",
-       device = "png",dpi = "retina", units = "cm",
-       width = 32,height = 15)
-
-```
