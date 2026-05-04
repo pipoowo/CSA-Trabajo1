@@ -32,6 +32,7 @@ CSA-Trabajo1/
  |- input/
  |  |- bib/
  |  |  |- apa7.csl
+ |  |  |- mi_coleccion.bib
  |  |- data/
  |  |  |- original/
  |  |  |  |- Latinobarometro18_20_LARR.rds
