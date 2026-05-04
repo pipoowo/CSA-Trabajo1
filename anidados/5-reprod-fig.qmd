@@ -343,4 +343,4 @@ Otra dificultad fue que el libro de códigos del año 2020 identificaba como cas
 
 En tercer lugar, se intentó reconstruir la variable de clase social bajo el esquema propuesto por los autores, pero no se logró obtener la misma distribución que se muestra en el artículo original, lo que sugiere que hubo algún proceso de filtrado o recodificación adicional que no se encuentra documentado en el artículo ni en el repositorio. 
 
-Por último, a pesar de que en el artículo se menciona las variables de referencias utilizadas para los modelos de regresión binaria, en el código de análisis proporcionado por los autores no se especifica esta información, lo que dificultó la reproducción de los resultados en un primer momento. 
+Por último, a pesar de que en el artículo se mencionan las variables de referencias utilizadas para los modelos de regresión binaria, en el código de análisis proporcionado por los autores no se especifica esta información, lo que dificultó la reproducción de los resultados en un primer momento. 
