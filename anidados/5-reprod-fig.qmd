@@ -229,6 +229,7 @@ figura3 + plot_annotation(title = "Figura 4: Probabilidad de confiar en un sindi
 ```
 
 **Figura 4: Probabilidad de confiar en un sindicato por país y año**
+
 Similar al procedimiento que se hizo anteriormente, se calcularon modelos de regresión logística con interacciones entre país y año, controlando por las demás variables, tanto para la base reproducida como para la base original.
 ```{r}
 #| echo: true
