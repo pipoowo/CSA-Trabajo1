@@ -42,7 +42,7 @@ log1b <- glm(trustunions_life_dummy ~ class3+female+edad+pais+ano+
              family = "binomial")
 ```
 
-A continuación, en la @fig-figura-3 se presentan los resultados de la reproducción y comparación para la interacción entre clase social y año, y posición política y año, a partir de los modelos logísticos ejecutados. En los paneles (a) y (c) se muestra la reproducción utilizando la base de datos procesada, mientras que en los (b) y (d) se comparan los resultados obtenidos con la base reproducida y la base original proporcionada por los autores.
+A continuación, en la @fig-figura-3 se presentan los resultados de la reproducción y comparación para la interacción entre clase social y año, y posición política y año, a partir de los modelos logísticos ejecutados. En los paneles (a) y (c) se muestra la reproducción utilizando la base de datos procesada, mientras que en los (b) y (d) se comparan los resultados obtenidos con la base reproducida y la base original proporcionada por los autores. Tanto los gráficos reproducidos como los originales obtuvieron resultados similares en cuanto a las tendencias generales, sin embargo, se observaron diferencias significativas en los niveles de confianza predichos entre ambos años, como también de algunos grupos. 
 
 ```{r figura-3}
 #| echo: false
@@ -155,7 +155,7 @@ Int_Clase_Ano_Junto <- ggplot(predtot1, aes(x = x,
                      labels = scales::percent_format(accuracy = 1L)) +
   theme_standard
 
-#---- 4. Figura 1: Interaccion pol position /año (c y d) ----
+#---- 4. Figura 3: Interaccion pol position /año (c y d) ----
 log2a <- glm(conf_sindicato_dic ~ clase_social + sexo + edad + pais + ano +
               conf_instituciones + posicion_pol_ord + posicion_pol_ord*ano,
             data = datos_lb_proc,
@@ -223,12 +223,13 @@ Int_PolPos_Ano_Junto <- ggplot(predtot2, aes(x = x,
 figura3 <- (Int_Clase_Ano + Int_Clase_Ano_Junto) / (Int_PolPos_Ano + Int_PolPos_Ano_Junto) +
   plot_layout(guides = "collect")
 
-figura3 + plot_annotation(title = "Figura 4: Probabilidad de confiar en un sindicato por clase social y año, y posición política y año (Reproducción y comparación).",
+figura3 + plot_annotation(title = "Figura 3: Probabilidad de confiar en un sindicato por clase social y año, y posición política y año (Reproducción y comparación).",
                         theme = theme(plot.title = element_text(size = 16, face = "bold", hjust = 0.5, margin = margin(b = 12)),
                                       plot.margin = margin(10, 10, 10, 10)))
 ```
 
 **Figura 4: Probabilidad de confiar en un sindicato por país y año**
+
 Similar al procedimiento que se hizo anteriormente, se calcularon modelos de regresión logística con interacciones entre país y año, controlando por las demás variables, tanto para la base reproducida como para la base original.
 ```{r}
 #| echo: true
@@ -245,7 +246,7 @@ log3b<- glm(trustunions_life_dummy ~ class3+female+edad+pais+ano+
            family = "binomial")
 ```
 
-Luego, se generaron gráficos de predicciones ajustadas para cada país y año, y se compararon los resultados entre ambas bases de datos. En la @fig-figura-4 se presentan los resultados de la reproducción y comparación para la interacción entre país y año, donde el panel (a) muestra la reproducción utilizando la base de datos procesada, mientras que en el panel (b) compara los resultados obtenidos con la base reproducida y la base original proporcionada por los autores. En ambos gráficos, los países están ordenados de menor a mayor confianza en sindicatos para facilitar la comparación visual entre ambos años.
+Luego, se generaron gráficos de predicciones ajustadas para cada país y año, y se compararon los resultados entre ambas bases de datos. En la @fig-figura-4 se presentan los resultados de la reproducción y comparación para la interacción entre país y año, donde el panel (a) muestra la reproducción utilizando la base de datos procesada, mientras que en el panel (b) compara los resultados obtenidos con la base reproducida y la base original proporcionada por los autores. Se puede observar que las figuras reproducida y original muestran tendencias casi idénticas con respecto a la confianza en los sindicatos por país y año, sin embargo, se aprecian leves diferencias en los niveles de confianza en sindicatos predichos. 
 ```{r figura-4}
 #| echo: false
 #| warning: false
@@ -285,7 +286,7 @@ Int_Pais_Ano <- ggplot(pred3a, aes(x = x, y = predicted, shape = group, color = 
   geom_point(size = 2.5) +
   geom_line(aes(group = group), size = 0.8) +
   geom_errorbar(aes(ymin = conf.low, ymax = conf.high), width = 0.2, alpha = 0.7) +
-  labs(title = "a) Recreación",
+  labs(title = "a) Reproducción",
        subtitle = "Probabilidad de confiar en un sindicato por país y año",
        x = "País", y = "% de confiar en sindicato") +
   scale_x_discrete(name = "") +
@@ -318,7 +319,7 @@ Int_Pais_Ano_Junto <- ggplot(predtot3, aes(x = x,
   scale_shape_manual(name = "Año", values = c(16, 17)) +
   scale_linetype_manual(name = "Año", values = c("solid", "dashed")) +
   scale_color_manual(name = "Base de datos",
-                     labels = c("datos_lb_proc"="Recreación: Calderón et al. (2026)",
+                     labels = c("datos_lb_proc"="Reproducción: elaboración propia",
                             "Latinobarometro18_20_LARR"="Original: Pérez & Carrasco (2024)"),
                      values = c("#1f77b4", "#d62728")) +
   scale_y_continuous(limits = c(0, 0.50), breaks = seq(0, 0.50, by = 0.05),
@@ -329,7 +330,7 @@ Int_Pais_Ano_Junto <- ggplot(predtot3, aes(x = x,
 
 figura4 <- Int_Pais_Ano / Int_Pais_Ano_Junto + 
   plot_layout(guides = "collect")
-figura4 + plot_annotation(title = "Figura 4: Probabilidad de confiar en un sindicato por país y año (Recreación y comparación)",
+figura4 + plot_annotation(title = "Figura 4: Probabilidad de confiar en un sindicato por país y año (Reproducción y comparación)",
                         theme = theme(plot.title = element_text(size = 16, face = "bold", hjust = 0.5, margin = margin(b = 12)),
                                       plot.margin = margin(10, 10, 10, 10)))
 ```

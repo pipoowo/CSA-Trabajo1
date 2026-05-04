@@ -109,7 +109,7 @@ datos_2018 <- datos_2018 %>%
 
 ```
 
-Para la variable **clase social** se crearon seis categorías basado en el esquema de Erik O. Wright.
+Para la variable **clase social** se crearon seis categorías basadas en el esquema de Erik O. Wright. Cabe mencionar que en todos los casos se consideraron los trabajadores activos como también los jubilados/pensionados y temporalmente inactivos, los cuales en la base de datos se separan en tipo de trabajo (a), que referiere a la situación ocupacional actual, y (b), a la anterior. 
 
 - La primera categoría corresponde a **grandes empleadores** y se construye identificando quienes son independientes (valor 1 de la variable situación ocupacional), dueños de empresa (valor 2 de la variable tipo de trabajo), y que además declaran recibir un ingreso subjetivo con el cual "les alcanza bien" y "pueden ahorrar" (valor 1 de la variable ingreso subjetivo). 
 
